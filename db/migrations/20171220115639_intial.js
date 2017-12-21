@@ -7,9 +7,9 @@ exports.up = (knex, Promise) =>
       table.text('justification');
       table.integer('inscribed');
       table.string('category');
-      table.decimal('size');
-      table.decimal('longitude');
-      table.decimal('latitude');
+      table.decimal('size', 16);
+      table.decimal('longitude', 16);
+      table.decimal('latitude', 16);
       table.string('country_name');
       table.string('country_iso');
       table.string('region');
