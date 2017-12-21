@@ -17,9 +17,9 @@ const requireHTTPS = (request, response, next) => {
 };
 if (process.env.NODE_ENV === 'production') { app.use(requireHTTPS); }
 
+app.use(express.static('./build/'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('/build/'));
 app.set('port', process.env.PORT || 4000);
 
 app.locals.title = 'APP NAME';
