@@ -8,12 +8,11 @@ const database = require('knex')(configuration);
 const app = express();
 const bodyParser = require('body-parser');
 
-// eslint-disable-next-line
 const requireHTTPS = (request, response, next) => {
   if (request.header('x-forwarded-proto') !== 'https') {
     return response.redirect(`https://${request.header('host')}${request.url}`);
   }
-  next();
+  return next();
 };
 if (process.env.NODE_ENV === 'production') { app.use(requireHTTPS); }
 
