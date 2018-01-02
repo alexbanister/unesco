@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: "off" */
 const express = require('express');
 
 const environment = process.env.NODE_ENV || 'development';
@@ -26,22 +27,22 @@ app.locals.title = 'APP NAME';
 
 app.get('/api/v1/sites', (request, response) => {
   database('sites').select()
-  .then((response) => response.status(200).json({ sites }))
-  .catch(error => response.status(500).json({ error }));
+    .then(sites => response.status(200).json({ sites }))
+    .catch(error => response.status(500).json({ error }));
 });
 
 app.get('/api/v1/sites/:id', (request, response) => {
   const { id } = request.body;
   database('sites').where('id', id).select()
-  .then((site) => {
-    if(!site.length){
-      return response.status(404).json({ error: `No site found with id ${id}` })
-    }
-    return response.status(200).json({ site });
-  })
-  .catch(error => response.status(500).json({ error }));
+    .then((site) => {
+      if (!site.length) {
+        return response.status(404).json({ error: `No site found with id ${id}` });
+      }
+      return response.status(200).json({ site });
+    })
+    .catch(error => response.status(500).json({ error }));
 });
-app.post('api/v1/sites', (request, response) => {})
+app.post('api/v1/sites', (request, response) => {});
 app.patch('api/v1/sites/:id', (request, response) => { });
 app.delete('api/v1/sites', (request, response) => { });
 
@@ -62,16 +63,17 @@ app.get('api/v1/users/:id/wants', (request, response) => {});
 app.post('api/v1/users/:id/wants', (request, response) => {});
 app.delete('api/v1/users/:id/wants', (request, response) => {});
 
-app.use(function (request, response, next) {
-  response.status(404).send("Sorry can't find that!");
+app.use((request, response, next) => {
+  response.status(404).send('Sorry can\'t find that!');
   response.end();
 });
 
-app.use(function (error, request, response, next) {
+app.use((error, request, response, next) => {
+  // eslint-disable-next-line no-console
   console.error(error.stack);
   response.status(500).send('Something broke!');
   response.end();
-})
+});
 
 app.listen(app.get('port'), () => {
   // eslint-disable-next-line no-console
