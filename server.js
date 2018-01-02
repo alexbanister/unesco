@@ -74,14 +74,13 @@ app.post('/api/v1/users', (request, response) => {
 // app.delete('/api/v1/users/:id', (request, response) => {});
 
 app.get('/api/v1/users/:id/favorites', (request, response) => {
-  const { userId } = request.params;
-  database('sites').where('id', userId).select()
-    .then((site) => {
-      if (!site.length) {
-        return response.status(404).json({ error: 'No favorites found' });
-      }
-      return response.status(200).json({ site });
-    })
+  const { id } = request.params;
+
+  database('sites')
+    .join('favorites', 'favorites.site_id', 'sites.id')
+    .where('favorites.user_id', id)
+    .select('*')
+    .then(favorites => response.status(200).json(favorites))
     .catch(error => response.status(500).json({ error }));
 });
 app.post('/api/v1/users/:id/favorites', (request, response) => {
@@ -102,7 +101,24 @@ app.post('/api/v1/users/:id/favorites', (request, response) => {
       response.status(500).json(error);
     });
 });
-app.delete('/api/v1/users/:id/favorites', (request, response) => {});
+app.delete('/api/v1/users/:id/favorites', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  database('favorites')
+    .where({
+      user_id: id,
+      site_id: siteId
+    })
+    .del()
+    .then((result) => {
+      if (!result) {
+        response.status(422).json({ error: 'No Favorite Found' });
+      } else {
+        response.sendStatus(204);
+      }
+    })
+    .catch(error => response.status(422).json(error));
+});
 
 app.get('/api/v1/users/:id/visited', (request, response) => {});
 app.post('/api/v1/users/:id/visited', (request, response) => {});
