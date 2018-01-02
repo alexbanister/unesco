@@ -1,6 +1,4 @@
-/* eslint no-unused-vars: "off" */
 const express = require('express');
-const path = require('path');
 
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
@@ -214,12 +212,12 @@ app.delete('/api/v1/users/:id/wants', (request, response) => {
     .catch(error => response.status(422).json(error));
 });
 
-app.use((request, response, next) => {
+app.use((request, response) => {
   response.status(404).send('Sorry can\'t find that!');
   response.end();
 });
 
-app.use((error, request, response, next) => {
+app.use((error, request, response) => {
   // eslint-disable-next-line no-console
   console.error(error.stack);
   response.status(500).send('Something broke!');
