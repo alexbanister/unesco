@@ -1,4 +1,3 @@
-/* eslint no-unused-vars: "off" */
 const express = require('express');
 
 const environment = process.env.NODE_ENV || 'development';
@@ -17,12 +16,13 @@ const requireHTTPS = (request, response, next) => {
 };
 if (process.env.NODE_ENV === 'production') { app.use(requireHTTPS); }
 
-app.use(express.static('./build/'));
+const port = process.env.NODE_ENV === 'test' ? 5000 : process.env.PORT || 4000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('port', process.env.PORT || 4000);
+app.use(express.static('./build'));
+app.set('port', port);
 
-app.locals.title = 'APP NAME';
+app.locals.title = 'UNESCO Tracker';
 
 app.get('/api/v1/sites', (request, response) => {
   database('sites').select()
@@ -31,7 +31,7 @@ app.get('/api/v1/sites', (request, response) => {
 });
 
 app.get('/api/v1/sites/:id', (request, response) => {
-  const { id } = request.body;
+  const { id } = request.params;
   database('sites').where('id', id).select()
     .then((site) => {
       if (!site.length) {
@@ -41,33 +41,183 @@ app.get('/api/v1/sites/:id', (request, response) => {
     })
     .catch(error => response.status(500).json({ error }));
 });
-app.post('api/v1/sites', (request, response) => {});
-app.patch('api/v1/sites/:id', (request, response) => { });
-app.delete('api/v1/sites', (request, response) => { });
 
-app.post('api/v1/users', (request, response) => {});
-app.get('api/v1/users/:id', (request, response) => {});
-app.patch('api/v1/users/:id', (request, response) => {});
-app.delete('api/v1/users/:id', (request, response) => {});
+app.get('/api/v1/users/:id', (request, response) => {
+  const { id } = request.params;
+  database('users').where('id', id).select()
+    .then((user) => {
+      if (!user.length) {
+        return response.status(404).json({ error: `No user found with id ${id}` });
+      }
+      return response.status(200).json(user[0]);
+    })
+    .catch(error => response.status(500).json({ error }));
+});
+app.post('/api/v1/users', (request, response) => {
+  if (!request.body.email &&
+      !request.body.first_name &&
+      !request.body.last_name &&
+      !request.body.token) {
+    return response.status(422)
+      .json({ error: 'Expected format: { email: <String>, first_name: <String>, last_name: <String>, token: <String> }.' });
+  }
+  return database('users').insert(request.body, 'id')
+    .then((id) => {
+      response.status(201).json(id);
+    })
+    .catch((error) => {
+      response.status(500).json(error);
+    });
+});
+// app.delete('/api/v1/users/:id', (request, response) => {});
 
-app.get('api/v1/users/:id/favorites', (request, response) => {});
-app.post('api/v1/users/:id/favorites', (request, response) => {});
-app.delete('api/v1/users/:id/favorites', (request, response) => {});
+app.get('/api/v1/users/:id/favorites', (request, response) => {
+  const { id } = request.params;
 
-app.get('api/v1/users/:id/visited', (request, response) => {});
-app.post('api/v1/users/:id/visited', (request, response) => {});
-app.delete('api/v1/users/:id/visited', (request, response) => {});
+  database('sites')
+    .join('favorites', 'favorites.site_id', 'sites.id')
+    .where('favorites.user_id', id)
+    .select('*')
+    .then(favorites => response.status(200).json(favorites))
+    .catch(error => response.status(500).json({ error }));
+});
+app.post('/api/v1/users/:id/favorites', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  if (!siteId) {
+    return response.status(422)
+      .json({ error: 'Expected format: { siteId: <Int> }.' });
+  }
+  return database('favorites').insert({
+    user_id: id,
+    site_id: siteId
+  })
+    .then(() => {
+      response.status(204).send();
+    })
+    .catch((error) => {
+      response.status(500).json(error);
+    });
+});
+app.delete('/api/v1/users/:id/favorites', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  database('favorites')
+    .where({
+      user_id: id,
+      site_id: siteId
+    })
+    .del()
+    .then((result) => {
+      if (!result) {
+        response.status(422).json({ error: 'No favorite site found' });
+      } else {
+        response.sendStatus(204);
+      }
+    })
+    .catch(error => response.status(422).json(error));
+});
 
-app.get('api/v1/users/:id/wants', (request, response) => {});
-app.post('api/v1/users/:id/wants', (request, response) => {});
-app.delete('api/v1/users/:id/wants', (request, response) => {});
+app.get('/api/v1/users/:id/visited', (request, response) => {
+  const { id } = request.params;
 
-app.use((request, response, next) => {
+  database('sites')
+    .join('visited', 'visited.site_id', 'sites.id')
+    .where('visited.user_id', id)
+    .select('*')
+    .then(visited => response.status(200).json(visited))
+    .catch(error => response.status(500).json({ error }));
+});
+app.post('/api/v1/users/:id/visited', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  if (!siteId) {
+    return response.status(422)
+      .json({ error: 'Expected format: { siteId: <Int> }.' });
+  }
+  return database('visited').insert({
+    user_id: id,
+    site_id: siteId
+  })
+    .then(() => {
+      response.status(204).send();
+    })
+    .catch((error) => {
+      response.status(500).json(error);
+    });
+});
+app.delete('/api/v1/users/:id/visited', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  database('visited')
+    .where({
+      user_id: id,
+      site_id: siteId
+    })
+    .del()
+    .then((result) => {
+      if (!result) {
+        response.status(422).json({ error: 'No visted site found' });
+      } else {
+        response.sendStatus(204);
+      }
+    })
+    .catch(error => response.status(422).json(error));
+});
+
+app.get('/api/v1/users/:id/wants', (request, response) => {
+  const { id } = request.params;
+
+  database('sites')
+    .join('wants', 'wants.site_id', 'sites.id')
+    .where('wants.user_id', id)
+    .select('*')
+    .then(wants => response.status(200).json(wants))
+    .catch(error => response.status(500).json({ error }));
+});
+app.post('/api/v1/users/:id/wants', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  if (!siteId) {
+    return response.status(422)
+      .json({ error: 'Expected format: { siteId: <Int> }.' });
+  }
+  return database('wants').insert({
+    user_id: id,
+    site_id: siteId
+  })
+    .then(() => {
+      response.status(204).send();
+    })
+    .catch((error) => {
+      response.status(500).json(error);
+    });
+});
+app.delete('/api/v1/users/:id/wants', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  database('wants')
+    .where({
+      user_id: id,
+      site_id: siteId
+    })
+    .del()
+    .then((result) => {
+      if (!result) {
+        response.status(422).json({ error: 'No wanted sites found' });
+      } else {
+        response.sendStatus(204);
+      }
+    })
+    .catch(error => response.status(422).json(error));
+});
+
+app.use((request, response) => {
   response.status(404).send('Sorry can\'t find that!');
   response.end();
 });
 
-app.use((error, request, response, next) => {
+app.use((error, request, response) => {
   // eslint-disable-next-line no-console
   console.error(error.stack);
   response.status(500).send('Something broke!');
