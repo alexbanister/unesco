@@ -72,11 +72,24 @@ class Welcome extends Component {
   };
 
   continueWithGoogle = () => {
+    const currentUser = firebase.auth().currentUser;
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((response) => {
-        const { uid, email, displayName } = response.user;
-        console.log(uid, email, displayName);
+
+    if (!currentUser) {
+      return firebase.auth().signInWithPopup(provider)
+        .then((response) => {
+          const { uid, email, displayName } = response.user;
+          console.log(uid, email, displayName);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+    currentUser.linkWithPopup(provider)
+      .then((result) => {
+        const { credential, user } = result;
+        console.log(credential, user);
       })
       .catch((error) => {
         console.error(error);
@@ -84,11 +97,23 @@ class Welcome extends Component {
   }
 
   continueWithFacebook = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((response) => {
-        const { uid, email, displayName } = response.user;
-        console.log(uid, email, displayName);
+    const currentUser = firebase.auth().currentUser;
+    const provider = new firebase.auth.FacebookAuthProvider();
+    if (!currentUser) {
+      return firebase.auth().signInWithPopup(provider)
+        .then((response) => {
+          const { uid, email, displayName } = response.user;
+          console.log(uid, email, displayName);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+    currentUser.linkWithPopup(provider)
+      .then((result) => {
+        const { credential, user } = result;
+        console.log(credential, user);
       })
       .catch((error) => {
         console.error(error);
@@ -96,14 +121,23 @@ class Welcome extends Component {
   }
 
   continueWithTwitter = () => {
+    const currentUser = firebase.auth().currentUser;
     const provider = new firebase.auth.TwitterAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((response) => {
-        console.log(Object.keys(response.user));
-        const { uid, email, displayName } = response.user;
-        const { accessToken, secret } = response.credential;
-        console.log(uid, email, displayName);
-        console.log(accessToken, secret);
+    if (!currentUser) {
+      return firebase.auth().signInWithPopup(provider)
+        .then((response) => {
+          const { uid, email, displayName } = response.user;
+          console.log(uid, email, displayName);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+    currentUser.linkWithPopup(provider)
+      .then((result) => {
+        const { credential, user } = result;
+        console.log(credential, user);
       })
       .catch((error) => {
         console.error(error);
