@@ -55,11 +55,10 @@ app.get('/api/v1/users/:id', (request, response) => {
 });
 app.post('/api/v1/users', (request, response) => {
   if (!request.body.email &&
-      !request.body.first_name &&
-      !request.body.last_name &&
-      !request.body.token) {
+      !request.body.id &&
+      !request.body.name) {
     return response.status(422)
-      .json({ error: 'Expected format: { email: <String>, first_name: <String>, last_name: <String>, token: <String> }.' });
+      .json({ error: 'Expected format: { email: <String>, name: <String>, id: <String> }.' });
   }
   return database('users').insert(request.body, 'id')
     .then((id) => {
