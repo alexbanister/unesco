@@ -112,7 +112,7 @@ app.delete('/api/v1/users/:id/favorites', (request, response) => {
     .del()
     .then((result) => {
       if (!result) {
-        response.status(422).json({ error: 'No Favorite Found' });
+        response.status(422).json({ error: 'No favorite site found' });
       } else {
         response.sendStatus(204);
       }
@@ -120,13 +120,99 @@ app.delete('/api/v1/users/:id/favorites', (request, response) => {
     .catch(error => response.status(422).json(error));
 });
 
-app.get('/api/v1/users/:id/visited', (request, response) => {});
-app.post('/api/v1/users/:id/visited', (request, response) => {});
-app.delete('/api/v1/users/:id/visited', (request, response) => {});
+app.get('/api/v1/users/:id/visited', (request, response) => {
+  const { id } = request.params;
 
-app.get('/api/v1/users/:id/wants', (request, response) => {});
-app.post('/api/v1/users/:id/wants', (request, response) => {});
-app.delete('/api/v1/users/:id/wants', (request, response) => {});
+  database('sites')
+    .join('visited', 'visited.site_id', 'sites.id')
+    .where('visited.user_id', id)
+    .select('*')
+    .then(visited => response.status(200).json(visited))
+    .catch(error => response.status(500).json({ error }));
+});
+app.post('/api/v1/users/:id/visited', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  if (!siteId) {
+    return response.status(422)
+      .json({ error: 'Expected format: { siteId: <Int> }.' });
+  }
+  return database('visited').insert({
+    user_id: id,
+    site_id: siteId
+  })
+    .then(() => {
+      response.status(204).send();
+    })
+    .catch((error) => {
+      response.status(500).json(error);
+    });
+});
+app.delete('/api/v1/users/:id/visited', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  database('visited')
+    .where({
+      user_id: id,
+      site_id: siteId
+    })
+    .del()
+    .then((result) => {
+      if (!result) {
+        response.status(422).json({ error: 'No visted site found' });
+      } else {
+        response.sendStatus(204);
+      }
+    })
+    .catch(error => response.status(422).json(error));
+});
+
+app.get('/api/v1/users/:id/wants', (request, response) => {
+  const { id } = request.params;
+
+  database('sites')
+    .join('wants', 'wants.site_id', 'sites.id')
+    .where('wants.user_id', id)
+    .select('*')
+    .then(wants => response.status(200).json(wants))
+    .catch(error => response.status(500).json({ error }));
+});
+app.post('/api/v1/users/:id/wants', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  if (!siteId) {
+    return response.status(422)
+      .json({ error: 'Expected format: { siteId: <Int> }.' });
+  }
+  return database('wants').insert({
+    user_id: id,
+    site_id: siteId
+  })
+    .then(() => {
+      response.status(204).send();
+    })
+    .catch((error) => {
+      response.status(500).json(error);
+    });
+});
+app.delete('/api/v1/users/:id/wants', (request, response) => {
+  const { id } = request.params;
+  const { siteId } = request.body;
+  database('wants')
+    .where({
+      user_id: id,
+      site_id: siteId
+    })
+    .del()
+    .then((result) => {
+      if (!result) {
+        response.status(422).json({ error: 'No wanted sites found' });
+      } else {
+        response.sendStatus(204);
+      }
+    })
+    .catch(error => response.status(422).json(error));
+});
 
 app.use((request, response, next) => {
   response.status(404).send('Sorry can\'t find that!');
