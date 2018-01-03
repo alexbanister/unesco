@@ -45,9 +45,7 @@ class Welcome extends Component {
 
   handleLogOut = () => {
     firebase.auth().signOut()
-      .then(() => {
-        this.props.logoutAction();
-      })
+      .then(() => this.props.logoutAction())
       .catch((error) => {
         console.log('error: ', error);
       });
@@ -93,7 +91,6 @@ class Welcome extends Component {
     return currentUser.linkWithPopup(provider)
       .then((result) => {
         const { credential, user } = result;
-        console.log(credential, user);
       })
       .catch((error) => {
         console.error(error);
@@ -118,7 +115,6 @@ class Welcome extends Component {
     return currentUser.linkWithPopup(provider)
       .then((result) => {
         const { credential, user } = result;
-        console.log(credential, user);
       })
       .catch((error) => {
         console.error(error);
