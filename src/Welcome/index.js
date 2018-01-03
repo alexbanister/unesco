@@ -1,9 +1,13 @@
+/* eslint no-unused-vars: 0 */
+/* eslint prefer-destrucuring: 0 */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import fire from '../utils/fire';
+import { loginAction, logoutAction } from './actions';
 
 class Welcome extends Component {
   state = {
@@ -11,6 +15,18 @@ class Welcome extends Component {
     password: '',
     firstName: '',
     lastName: ''
+  }
+
+  componentDidMount() {
+    this.checkUserLoginStatus();
+  }
+
+  checkUserLoginStatus = () => {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.props.loginAction(user.uid);
+      }
+    });
   }
 
   handleChange(key, event) {
@@ -25,16 +41,13 @@ class Welcome extends Component {
 
     fire.auth().signInWithEmailAndPassword(email, password)
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
+        const { errorCode, errorMessage } = error;
         console.log(errorCode, errorMessage);
       });
 
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('LOGged IN');
-        console.log('user uid: ', user.uid);
+        loginAction(user.uid);
       } else {
         this.handleLogOut();
       }
@@ -43,7 +56,7 @@ class Welcome extends Component {
 
   handleLogOut = () => {
     firebase.auth().signOut()
-      .then(() => {})
+      .then(() => this.props.logoutAction())
       .catch((error) => {
         console.log('error: ', error);
       });
@@ -71,43 +84,98 @@ class Welcome extends Component {
     });
   };
 
+  generateFetchPostPayload = body => ({
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify(body)
+  });
+
+  addUserToDatabase = (id, email, name) => {
+    const postBody = { id, email, name };
+    const postPayload = this.generateFetchPostPayload(postBody);
+
+    fetch('/api/v1/users', postPayload)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(error => console.log('hit fetch catch'));
+  }
+
   continueWithGoogle = () => {
+    // eslint-disable-next-line
+    const currentUser = firebase.auth().currentUser;
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((response) => {
-        const { uid, email, displayName } = response.user;
-        console.log(uid, email, displayName);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+
+    if (!currentUser) {
+      return firebase.auth().signInWithPopup(provider)
+        .then((response) => {
+          const { uid, email, displayName } = response.user;
+
+          this.props.loginAction(uid);
+          fetch(`/api/v1/users/${uid}`)
+            .then((res) => {
+              if (!res.ok) {
+                this.addUserToDatabase(uid, email, displayName);
+              }
+            })
+            .catch(error => console.error({ error }));
+        })
+        .catch(error => console.error({ error }));
+    }
+
+    return currentUser.linkWithPopup(provider)
+      .catch(error => console.error({ error }));
   }
 
   continueWithFacebook = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((response) => {
-        const { uid, email, displayName } = response.user;
-        console.log(uid, email, displayName);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // eslint-disable-next-line
+    const currentUser = firebase.auth().currentUser;
+    const provider = new firebase.auth.FacebookAuthProvider();
+
+    if (!currentUser) {
+      return firebase.auth().signInWithPopup(provider)
+        .then((response) => {
+          const { uid, email, displayName } = response.user;
+
+          this.props.loginAction(uid);
+          fetch(`/api/v1/users/${uid}`)
+            .then((res) => {
+              if (!res.ok) {
+                this.addUserToDatabase(uid, email, displayName);
+              }
+            })
+            .catch(error => console.error({ error }));
+        })
+        .catch(error => console.error({ error }));
+    }
+
+    return currentUser.linkWithPopup(provider)
+      .catch(error => console.error({ error }));
   }
 
   continueWithTwitter = () => {
+    // eslint-disable-next-line
+    const currentUser = firebase.auth().currentUser;
     const provider = new firebase.auth.TwitterAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((response) => {
-        console.log(Object.keys(response.user));
-        const { uid, email, displayName } = response.user;
-        const { accessToken, secret } = response.credential;
-        console.log(uid, email, displayName);
-        console.log(accessToken, secret);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+
+    if (!currentUser) {
+      return firebase.auth().signInWithPopup(provider)
+        .then((response) => {
+          const { uid, email, displayName } = response.user;
+
+          this.props.loginAction(uid);
+          fetch(`/api/v1/users/${uid}`)
+            .then((res) => {
+              if (!res.ok) {
+                this.addUserToDatabase(uid, email, displayName);
+              }
+            })
+            .catch(error => console.error({ error }));
+        })
+        .catch(error => console.error({ error }));
+    }
+
+    return currentUser.linkWithPopup(provider)
+      .catch(error => console.error(error));
   }
 
   render() {
@@ -144,16 +212,13 @@ class Welcome extends Component {
 
 Welcome.propTypes = {};
 
-const mapStateToProps = (store) => {
-  return {
-    store
-  };
-};
+const mapStateToProps = store => ({
+  user: store.user
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  loginAction: user => (dispatch(loginAction(user))),
+  logoutAction: user => (dispatch(logoutAction()))
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Welcome));

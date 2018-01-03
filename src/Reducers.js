@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
-import { questions } from './Welcome/reducers';
-
+import { user } from './Welcome/reducers';
 
 export default combineReducers({
-  questions
+  user
 });
