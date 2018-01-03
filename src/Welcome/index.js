@@ -1,9 +1,11 @@
+/* eslint no-unused-vars: 0 */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import fire from '../utils/fire';
+import { loginAction, logoutAction } from './actions';
 
 class Welcome extends Component {
   state = {
@@ -43,7 +45,9 @@ class Welcome extends Component {
 
   handleLogOut = () => {
     firebase.auth().signOut()
-      .then(() => {})
+      .then(() => {
+        this.props.logoutAction();
+      })
       .catch((error) => {
         console.log('error: ', error);
       });
@@ -72,21 +76,21 @@ class Welcome extends Component {
   };
 
   continueWithGoogle = () => {
-    const currentUser = firebase.auth().currentUser;
+    const { currentUser } = firebase.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
 
     if (!currentUser) {
       return firebase.auth().signInWithPopup(provider)
         .then((response) => {
           const { uid, email, displayName } = response.user;
-          console.log(uid, email, displayName);
+          this.props.loginAction(uid);
         })
         .catch((error) => {
           console.error(error);
         });
     }
 
-    currentUser.linkWithPopup(provider)
+    return currentUser.linkWithPopup(provider)
       .then((result) => {
         const { credential, user } = result;
         console.log(credential, user);
@@ -97,20 +101,21 @@ class Welcome extends Component {
   }
 
   continueWithFacebook = () => {
-    const currentUser = firebase.auth().currentUser;
+    const { currentUser } = firebase.auth();
     const provider = new firebase.auth.FacebookAuthProvider();
+
     if (!currentUser) {
       return firebase.auth().signInWithPopup(provider)
         .then((response) => {
           const { uid, email, displayName } = response.user;
-          console.log(uid, email, displayName);
+          this.props.loginAction(uid);
         })
         .catch((error) => {
           console.error(error);
         });
     }
 
-    currentUser.linkWithPopup(provider)
+    return currentUser.linkWithPopup(provider)
       .then((result) => {
         const { credential, user } = result;
         console.log(credential, user);
@@ -121,20 +126,21 @@ class Welcome extends Component {
   }
 
   continueWithTwitter = () => {
-    const currentUser = firebase.auth().currentUser;
+    const { currentUser } = firebase.auth();
     const provider = new firebase.auth.TwitterAuthProvider();
+
     if (!currentUser) {
       return firebase.auth().signInWithPopup(provider)
         .then((response) => {
           const { uid, email, displayName } = response.user;
-          console.log(uid, email, displayName);
+          this.props.loginAction(uid);
         })
         .catch((error) => {
           console.error(error);
         });
     }
 
-    currentUser.linkWithPopup(provider)
+    return currentUser.linkWithPopup(provider)
       .then((result) => {
         const { credential, user } = result;
         console.log(credential, user);
@@ -178,16 +184,13 @@ class Welcome extends Component {
 
 Welcome.propTypes = {};
 
-const mapStateToProps = (store) => {
-  return {
-    store
-  };
-};
+const mapStateToProps = store => ({
+  user: store.user
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  loginAction: user => (dispatch(loginAction(user))),
+  logoutAction: user => (dispatch(logoutAction()))
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Welcome));
