@@ -15,6 +15,18 @@ class Welcome extends Component {
     lastName: ''
   }
 
+  componentDidMount() {
+    this.checkUserLoginStatus();
+  }
+
+  checkUserLoginStatus = () => {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.props.loginAction(user.uid);
+      }
+    });
+  }
+
   handleChange(key, event) {
     this.setState({
       [key]: event.target.value
@@ -27,9 +39,7 @@ class Welcome extends Component {
 
     fire.auth().signInWithEmailAndPassword(email, password)
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
+        const { errorCode, errorMessage } = error;
         console.log(errorCode, errorMessage);
       });
 
@@ -73,6 +83,22 @@ class Welcome extends Component {
     });
   };
 
+  generateFetchPostPayload = body => ({
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body
+  });
+
+  addUserToDatabase = (id, email, name) => {
+    const postBody = { id, email, name };
+    const postPayload = this.generateFetchPostPayload(postBody);
+
+    fetch('/api/v1/users', postPayload)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch((error) => { throw error; });
+  }
+
   continueWithGoogle = () => {
     const { currentUser } = firebase.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -82,6 +108,13 @@ class Welcome extends Component {
         .then((response) => {
           const { uid, email, displayName } = response.user;
           this.props.loginAction(uid);
+          fetch(`/api/v1/users/${uid}`)
+            .then((res) => {
+              if (res.ok) { return null; }
+              return res;
+            })
+            .then(res => console.log(res))
+            .catch((error) => { throw error; });
         })
         .catch((error) => {
           console.error(error);
