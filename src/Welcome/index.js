@@ -1,4 +1,6 @@
 /* eslint no-unused-vars: 0 */
+/* eslint prefer-destrucuring: 0 */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
@@ -45,8 +47,7 @@ class Welcome extends Component {
 
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('LOGged IN');
-        console.log('user uid: ', user.uid);
+        loginAction(user.uid);
       } else {
         this.handleLogOut();
       }
@@ -86,7 +87,7 @@ class Welcome extends Component {
   generateFetchPostPayload = body => ({
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
-    body
+    body: JSON.stringify(body)
   });
 
   addUserToDatabase = (id, email, name) => {
@@ -96,87 +97,85 @@ class Welcome extends Component {
     fetch('/api/v1/users', postPayload)
       .then(response => response.json())
       .then(response => console.log(response))
-      .catch((error) => { throw error; });
+      .catch(error => console.log('hit fetch catch'));
   }
 
   continueWithGoogle = () => {
-    const { currentUser } = firebase.auth();
+    // eslint-disable-next-line
+    const currentUser = firebase.auth().currentUser;
     const provider = new firebase.auth.GoogleAuthProvider();
 
     if (!currentUser) {
       return firebase.auth().signInWithPopup(provider)
         .then((response) => {
           const { uid, email, displayName } = response.user;
+
           this.props.loginAction(uid);
           fetch(`/api/v1/users/${uid}`)
             .then((res) => {
-              if (res.ok) { return null; }
-              return res;
+              if (!res.ok) {
+                this.addUserToDatabase(uid, email, displayName);
+              }
             })
-            .then(res => console.log(res))
-            .catch((error) => { throw error; });
+            .catch(error => console.error({ error }));
         })
-        .catch((error) => {
-          console.error(error);
-        });
+        .catch(error => console.error({ error }));
     }
 
     return currentUser.linkWithPopup(provider)
-      .then((result) => {
-        const { credential, user } = result;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(error => console.error({ error }));
   }
 
   continueWithFacebook = () => {
-    const { currentUser } = firebase.auth();
+    // eslint-disable-next-line
+    const currentUser = firebase.auth().currentUser;
     const provider = new firebase.auth.FacebookAuthProvider();
 
     if (!currentUser) {
       return firebase.auth().signInWithPopup(provider)
         .then((response) => {
           const { uid, email, displayName } = response.user;
+
           this.props.loginAction(uid);
+          fetch(`/api/v1/users/${uid}`)
+            .then((res) => {
+              if (!res.ok) {
+                this.addUserToDatabase(uid, email, displayName);
+              }
+            })
+            .catch(error => console.error({ error }));
         })
-        .catch((error) => {
-          console.error(error);
-        });
+        .catch(error => console.error({ error }));
     }
 
     return currentUser.linkWithPopup(provider)
-      .then((result) => {
-        const { credential, user } = result;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(error => console.error({ error }));
   }
 
   continueWithTwitter = () => {
-    const { currentUser } = firebase.auth();
+    // eslint-disable-next-line
+    const currentUser = firebase.auth().currentUser;
     const provider = new firebase.auth.TwitterAuthProvider();
 
     if (!currentUser) {
       return firebase.auth().signInWithPopup(provider)
         .then((response) => {
           const { uid, email, displayName } = response.user;
+
           this.props.loginAction(uid);
+          fetch(`/api/v1/users/${uid}`)
+            .then((res) => {
+              if (!res.ok) {
+                this.addUserToDatabase(uid, email, displayName);
+              }
+            })
+            .catch(error => console.error({ error }));
         })
-        .catch((error) => {
-          console.error(error);
-        });
+        .catch(error => console.error({ error }));
     }
 
     return currentUser.linkWithPopup(provider)
-      .then((result) => {
-        const { credential, user } = result;
-        console.log(credential, user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(error => console.error(error));
   }
 
   render() {
