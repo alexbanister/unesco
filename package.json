@@ -33,6 +33,7 @@
     "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
     "body-parser": "^1.18.2",
+    "commons-photo-url": "^0.1.2",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.2",
@@ -49,7 +50,8 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "world-heritage-image": "^0.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

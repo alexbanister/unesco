@@ -1,18 +1,38 @@
-/* eslint no-unused-vars: 0 */
-
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import heritageImage from 'world-heritage-image';
+import commons from 'commons-photo-url';
 
-const Header = ({ site }) => {
-  return (
-    <article className="site-card">
-      {site.name}
-    </article>
-  );
-};
+class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      img: ''
+    };
+  }
 
-Header.propTypes = {};
+  async componentWillMount() {
+    const url = await heritageImage(this.props.site.id)
+      .then((img) => {
+        if (img) {
+          return commons(img, commons.sizes.medium);
+        }
+        return 'no-image.png';
+      })
+      .then(img => img);
+    this.setState({ img: url });
+  }
 
-export default Header;
+  render() {
+    return (
+      <article className="site-card">
+        {this.props.site.name}
+        <img src={this.state.img} alt="hi" />;
+      </article>
+    );
+  }
+}
+
+Card.propTypes = {};
+
+export default Card;
