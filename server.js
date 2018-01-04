@@ -65,7 +65,7 @@ app.post('/api/v1/users', (request, response) => {
         return database('users').insert(request.body, '*')
           .then((user) => {
             response.status(201).json({
-              user,
+              user: user[0],
               favorites: [],
               visited: [],
               wants: []
@@ -78,22 +78,34 @@ app.post('/api/v1/users', (request, response) => {
       const favorites = await database('sites')
         .join('favorites', 'favorites.site_id', 'sites.id')
         .where('favorites.user_id', id)
-        .select('*')
-        .then(fav => fav)
+        .select('site_id')
+        .then((fav) => {
+          return fav.reduce((accum, site) => {
+            return [...accum, site.site_id];
+          }, []);
+        })
         .catch(error => error);
 
       const visited = await database('sites')
         .join('visited', 'visited.site_id', 'sites.id')
         .where('visited.user_id', id)
-        .select('*')
-        .then(visit => visit)
+        .select('site_id')
+        .then((visit) => {
+          return visit.reduce((accum, site) => {
+            return [...accum, site.site_id];
+          }, []);
+        })
         .catch(error => error);
 
       const wants = await database('sites')
         .join('wants', 'wants.site_id', 'sites.id')
         .where('wants.user_id', id)
-        .select('*')
-        .then(want => want)
+        .select('site_id')
+        .then((want) => {
+          return want.reduce((accum, site) => {
+            return [...accum, site.site_id];
+          }, []);
+        })
         .catch(error => error);
 
       return response.status(200).json({
