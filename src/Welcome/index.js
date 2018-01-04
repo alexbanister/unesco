@@ -173,7 +173,7 @@ class Welcome extends Component {
               }
             })
             .catch(error => console.error({ error }));
-          this.props.history.push('/dashboard');            
+          this.props.history.push('/dashboard');
         })
         .catch(error => console.error({ error }));
     }

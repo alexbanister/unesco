@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header/';
-import Nav from '../Nav/';
 
 class Dashboard extends Component {
   render() {
