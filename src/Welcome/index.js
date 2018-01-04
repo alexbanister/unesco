@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import firebase from 'firebase';
 import fire from '../utils/fire';
 import { loginAction, logoutAction } from './actions';
@@ -25,6 +25,7 @@ class Welcome extends Component {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         this.props.loginAction(user.uid);
+        this.props.history.push('/dashboard');
       }
     });
   }
@@ -118,6 +119,7 @@ class Welcome extends Component {
               }
             })
             .catch(error => console.error({ error }));
+          this.props.history.push('/dashboard');
         })
         .catch(error => console.error({ error }));
     }
@@ -144,6 +146,7 @@ class Welcome extends Component {
               }
             })
             .catch(error => console.error({ error }));
+          this.props.history.push('/dashboard');
         })
         .catch(error => console.error({ error }));
     }
@@ -170,6 +173,7 @@ class Welcome extends Component {
               }
             })
             .catch(error => console.error({ error }));
+          this.props.history.push('/dashboard');            
         })
         .catch(error => console.error({ error }));
     }
