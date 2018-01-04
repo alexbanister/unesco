@@ -16,9 +16,21 @@ class Welcome extends Component {
     this.checkUserLoginStatus();
   }
 
+  loadSites = () => {
+    const sites = localStorage.getItem('UNESCO_sites');
+    if (sites) {
+      this.props.addSites(JSON.parse(sites));
+      return true;
+    }
+    return false;
+  }
+
   getAllSites = async () => {
-    const sites = await getSites();
-    this.props.addSites(sites);
+    if (!this.loadSites()) {
+      const sites = await getSites();
+      this.props.addSites(sites.sites);
+      localStorage.setItem('UNESCO_sites', JSON.stringify(sites.sites));
+    }
   }
 
   checkUserLoginStatus = () => {
@@ -82,12 +94,13 @@ class Welcome extends Component {
 Welcome.propTypes = {};
 
 const mapStateToProps = store => ({
-  user: store.user
+  user: store.user,
+  sites: store.sites
 });
 
 const mapDispatchToProps = dispatch => ({
   loginAction: user => (dispatch(loginAction(user))),
-  addSites: sites => (dispatch(loginAction(sites)))
+  addSites: sites => (dispatch(addSites(sites)))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Welcome));
