@@ -7,12 +7,30 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import firebase from 'firebase';
 import fire from '../utils/fire';
-import { loginAction, logoutAction } from './actions';
-import { loginToServer } from '../API/';
+import { loginAction, logoutAction, addSites } from './actions';
+import { loginToServer, getSites } from '../API/';
 
 class Welcome extends Component {
   componentWillMount() {
+    this.getAllSites();
     this.checkUserLoginStatus();
+  }
+
+  loadSites = () => {
+    const sites = localStorage.getItem('UNESCO_sites');
+    if (sites) {
+      this.props.addSites(JSON.parse(sites));
+      return true;
+    }
+    return false;
+  }
+
+  getAllSites = async () => {
+    if (!this.loadSites()) {
+      const sites = await getSites();
+      this.props.addSites(sites.sites);
+      localStorage.setItem('UNESCO_sites', JSON.stringify(sites.sites));
+    }
   }
 
   checkUserLoginStatus = () => {
@@ -76,11 +94,13 @@ class Welcome extends Component {
 Welcome.propTypes = {};
 
 const mapStateToProps = store => ({
-  user: store.user
+  user: store.user,
+  sites: store.sites
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginAction: user => (dispatch(loginAction(user)))
+  loginAction: user => (dispatch(loginAction(user))),
+  addSites: sites => (dispatch(addSites(sites)))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Welcome));

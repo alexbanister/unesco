@@ -11,6 +11,9 @@ export const loginToServer = (user) => {
     .catch(err => err);
 };
 
-export const fake = () => {
-  return true;
+export const getSites = () => {
+  return fetch('/api/v1/sites/')
+    .then(response => response.json())
+    .then(parsedResponse => parsedResponse)
+    .catch(err => err);
 };
