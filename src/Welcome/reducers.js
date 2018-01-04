@@ -2,9 +2,9 @@
 
 export const user = (store = {}, action) => {
   switch (action.type) {
-  case 'SET_USER_ID':
+  case 'SET_USER':
     return Object.assign({}, action.user);
-  case 'CLEAR_USER_ID':
+  case 'CLEAR_USER':
     return Object.assign({});
   default:
     return store;

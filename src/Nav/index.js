@@ -25,7 +25,6 @@ const Header = () => {
           <Link to='/profile'>profile</Link>
         </li>
       </ul>
-      <button>log out</button>
     </nav>
   );
 };
