@@ -54,19 +54,56 @@ app.get('/api/v1/users/:id', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 app.post('/api/v1/users', (request, response) => {
-  if (!request.body.email &&
-      !request.body.id &&
-      !request.body.name) {
+  const { id, email, name } = request.body;
+  if (!email && !id && !name) {
     return response.status(422)
       .json({ error: 'Expected format: { email: <String>, name: <String>, id: <String> }.' });
   }
-  return database('users').insert(request.body, 'id')
-    .then((id) => {
-      response.status(201).json(id);
+  return database('users').where('id', id).select()
+    .then(async (users) => {
+      if (!users.length) {
+        return database('users').insert(request.body, '*')
+          .then((user) => {
+            response.status(201).json({
+              user,
+              favorites: [],
+              visited: [],
+              wants: []
+            });
+          })
+          .catch((error) => {
+            response.status(500).json(error);
+          });
+      }
+      const favorites = await database('sites')
+        .join('favorites', 'favorites.site_id', 'sites.id')
+        .where('favorites.user_id', id)
+        .select('*')
+        .then(fav => fav)
+        .catch(error => error);
+
+      const visited = await database('sites')
+        .join('visited', 'visited.site_id', 'sites.id')
+        .where('visited.user_id', id)
+        .select('*')
+        .then(visit => visit)
+        .catch(error => error);
+
+      const wants = await database('sites')
+        .join('wants', 'wants.site_id', 'sites.id')
+        .where('wants.user_id', id)
+        .select('*')
+        .then(want => want)
+        .catch(error => error);
+
+      return response.status(200).json({
+        user: users[0],
+        favorites,
+        visited,
+        wants
+      });
     })
-    .catch((error) => {
-      response.status(500).json(error);
-    });
+    .catch(error => response.status(500).json({ error }));
 });
 // app.delete('/api/v1/users/:id', (request, response) => {});
 
