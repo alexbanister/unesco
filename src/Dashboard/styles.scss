@@ -1,0 +1,24 @@
+@import "../variables.scss";
+
+.highlights {
+  background: $body-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid $highlight;
+  border-top: 3px solid $highlight;
+}
+.callout {
+  margin: 0 1rem;
+  h3 {
+    font-weight: 300;
+    font-size: 1.25rem;
+  }
+  h2 {
+    font-weight: 800;
+    font-size: 7rem;
+    line-height: 3rem;
+    margin: 1rem;
+    margin-bottom: 2rem;
+  }
+}
