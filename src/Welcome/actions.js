@@ -1,9 +1,9 @@
 export const loginAction = user => ({
-  type: 'SET_USER_ID',
+  type: 'SET_USER',
   user
 });
 
 export const logoutAction = user => ({
-  type: 'CLEAR_USER_ID',
+  type: 'CLEAR_USER',
   user
 });
