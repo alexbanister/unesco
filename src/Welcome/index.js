@@ -63,12 +63,39 @@ class Welcome extends Component {
 
   render() {
     return (
-      <div className='welcome'>
-        <button onClick={this.handleLogOut}>log out</button>
-        <button onClick={() => this.continueLogin('google')}>Continue With Google</button>
-        <button onClick={() => this.continueLogin('facebook')}>Continue With Facebook</button>
-        <button onClick={() => this.continueLogin('twitter')}>Continue With Twitter</button>
-      </div>
+      <main className='welcome'>
+        <div className='welcome__cover'>
+          <section className='welcome__content'>
+            <article className='welcome__logo__container'>
+              <img
+                className='welcome__logo__img'
+                // eslint-disable-next-line
+                src={require('../assets/icons/traveler-logo.svg')}
+                alt='unesco traveler logo' />
+            </article>
+            <article className='welcome__text__container'>
+              <p className='welcome__text'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo conse</p>
+            </article>
+            <article className='welcome__button__container'>
+              <button
+                className='welcome__button__google'
+                onClick={() => this.continueLogin('google')}>
+                Continue With Google
+              </button>
+              <button
+                className='welcome__button__twitter'
+                onClick={() => this.continueLogin('twitter')}>
+                Continue With Twitter
+              </button>
+              <button
+                className='welcome__button__facebook'
+                onClick={() => this.continueLogin('facebook')}>
+                Continue With Facebook
+              </button>
+            </article>
+          </section>
+        </div>
+      </main>
     );
   }
 }
