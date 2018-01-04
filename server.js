@@ -61,11 +61,17 @@ app.post('/api/v1/users', (request, response) => {
   }
   return database('users').where('id', id).select()
     .then(async (users) => {
+      // eslint-disable-next-line
+      const { email, id, name } = users[0];
       if (!users.length) {
         return database('users').insert(request.body, '*')
           .then((user) => {
+            // eslint-disable-next-line
+            const { email, id, name } = user[0];
             response.status(201).json({
-              user: user[0],
+              email,
+              id,
+              name,
               favorites: [],
               visited: [],
               wants: []
@@ -107,9 +113,10 @@ app.post('/api/v1/users', (request, response) => {
           }, []);
         })
         .catch(error => error);
-
       return response.status(200).json({
-        user: users[0],
+        email,
+        id,
+        name,
         favorites,
         visited,
         wants

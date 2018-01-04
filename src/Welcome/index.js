@@ -8,207 +8,66 @@ import { withRouter, Redirect } from 'react-router-dom';
 import firebase from 'firebase';
 import fire from '../utils/fire';
 import { loginAction, logoutAction } from './actions';
+import { loginToServer } from '../API/';
 
 class Welcome extends Component {
-  state = {
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: ''
-  }
-
-  componentDidMount() {
+  componentWillMount() {
     this.checkUserLoginStatus();
   }
 
   checkUserLoginStatus = () => {
-    fire.auth().onAuthStateChanged((user) => {
+    fire.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        this.props.loginAction(user.uid);
+        const { uid, email, displayName } = user;
+        const login = await loginToServer({
+          id: uid,
+          email,
+          name: displayName
+        });
+        this.props.loginAction(login);
         this.props.history.push('/dashboard');
       }
     });
   }
 
-  handleChange(key, event) {
-    this.setState({
-      [key]: event.target.value
-    });
-  }
-
-  handleLogin = (event) => {
-    event.preventDefault();
-    const { email, password } = this.state;
-
-    fire.auth().signInWithEmailAndPassword(email, password)
-      .catch((error) => {
-        const { errorCode, errorMessage } = error;
-        console.log(errorCode, errorMessage);
-      });
-
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        loginAction(user.uid);
-      } else {
-        this.handleLogOut();
-      }
-    });
-  };
-
-  handleLogOut = () => {
-    firebase.auth().signOut()
-      .then(() => this.props.logoutAction())
-      .catch((error) => {
-        console.log('error: ', error);
-      });
-  }
-
-  handleSignUp = (event) => {
-    event.preventDefault();
-    const { email, password } = this.state;
-
-    fire.auth().createUserWithEmailAndPassword(email, password)
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.log('error code: ', errorCode);
-        console.log('error message: ', errorMessage);
-      });
-
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log('user uid: ', user.uid);
-      } else {
-        console.log('no user signup');
-      }
-    });
-  };
-
-  generateFetchPostPayload = body => ({
-    headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
-    body: JSON.stringify(body)
-  });
-
-  addUserToDatabase = (id, email, name) => {
-    const postBody = { id, email, name };
-    const postPayload = this.generateFetchPostPayload(postBody);
-
-    fetch('/api/v1/users', postPayload)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(error => console.log('hit fetch catch'));
-  }
-
-  continueWithGoogle = () => {
+  continueLogin = (authSrc) => {
     // eslint-disable-next-line
     const currentUser = firebase.auth().currentUser;
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = {
+      google: new firebase.auth.GoogleAuthProvider(),
+      facebook: new firebase.auth.FacebookAuthProvider(),
+      twitter: new firebase.auth.TwitterAuthProvider()
+    };
 
     if (!currentUser) {
-      return firebase.auth().signInWithPopup(provider)
-        .then((response) => {
+      return firebase.auth().signInWithPopup(provider[authSrc])
+        .then(async (response) => {
           const { uid, email, displayName } = response.user;
-
-          this.props.loginAction(uid);
-          fetch(`/api/v1/users/${uid}`)
-            .then((res) => {
-              if (!res.ok) {
-                this.addUserToDatabase(uid, email, displayName);
-              }
-            })
-            .catch(error => console.error({ error }));
+          const user = await loginToServer({
+            id: uid,
+            email,
+            name: displayName
+          });
+          return user;
+        })
+        .then((res) => {
+          this.props.loginAction(res);
           this.props.history.push('/dashboard');
         })
-        .catch(error => console.error({ error }));
+        .catch(error => error);
     }
 
-    return currentUser.linkWithPopup(provider)
-      .catch(error => console.error({ error }));
-  }
-
-  continueWithFacebook = () => {
-    // eslint-disable-next-line
-    const currentUser = firebase.auth().currentUser;
-    const provider = new firebase.auth.FacebookAuthProvider();
-
-    if (!currentUser) {
-      return firebase.auth().signInWithPopup(provider)
-        .then((response) => {
-          const { uid, email, displayName } = response.user;
-
-          this.props.loginAction(uid);
-          fetch(`/api/v1/users/${uid}`)
-            .then((res) => {
-              if (!res.ok) {
-                this.addUserToDatabase(uid, email, displayName);
-              }
-            })
-            .catch(error => console.error({ error }));
-          this.props.history.push('/dashboard');
-        })
-        .catch(error => console.error({ error }));
-    }
-
-    return currentUser.linkWithPopup(provider)
-      .catch(error => console.error({ error }));
-  }
-
-  continueWithTwitter = () => {
-    // eslint-disable-next-line
-    const currentUser = firebase.auth().currentUser;
-    const provider = new firebase.auth.TwitterAuthProvider();
-
-    if (!currentUser) {
-      return firebase.auth().signInWithPopup(provider)
-        .then((response) => {
-          const { uid, email, displayName } = response.user;
-
-          this.props.loginAction(uid);
-          fetch(`/api/v1/users/${uid}`)
-            .then((res) => {
-              if (!res.ok) {
-                this.addUserToDatabase(uid, email, displayName);
-              }
-            })
-            .catch(error => console.error({ error }));
-          this.props.history.push('/dashboard');
-        })
-        .catch(error => console.error({ error }));
-    }
-
-    return currentUser.linkWithPopup(provider)
-      .catch(error => console.error(error));
+    return currentUser.linkWithPopup(provider[authSrc])
+      .catch(error => error);
   }
 
   render() {
     return (
       <div className='welcome'>
-        {/* <form>
-          <input
-            type='text'
-            placeholder='first name'
-            onChange={this.handleChange.bind(this, 'firstName')} />
-          <input
-            type='text'
-            placeholder='last name'
-            onChange={this.handleChange.bind(this, 'lastName')} />
-          <input
-            type='email'
-            placeholder='email'
-            onChange={this.handleChange.bind(this, 'email')} />
-          <input
-            type='password'
-            placeholder='password'
-            onChange={this.handleChange.bind(this, 'password')} />
-        </form> */}
-        {/* <button onClick={this.handleLogin}>log in</button>
-        <button onClick={this.handleSignUp}>sign up</button> */}
         <button onClick={this.handleLogOut}>log out</button>
-        <button onClick={this.continueWithGoogle}>Continue With Google</button>
-        <button onClick={this.continueWithFacebook}>Continue With Facebook</button>
-        <button onClick={this.continueWithTwitter}>Continue With Twitter</button>
+        <button onClick={() => this.continueLogin('google')}>Continue With Google</button>
+        <button onClick={() => this.continueLogin('facebook')}>Continue With Facebook</button>
+        <button onClick={() => this.continueLogin('twitter')}>Continue With Twitter</button>
       </div>
     );
   }
@@ -221,8 +80,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginAction: user => (dispatch(loginAction(user))),
-  logoutAction: user => (dispatch(logoutAction()))
+  loginAction: user => (dispatch(loginAction(user)))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Welcome));
