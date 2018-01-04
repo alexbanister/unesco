@@ -7,12 +7,18 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import firebase from 'firebase';
 import fire from '../utils/fire';
-import { loginAction, logoutAction } from './actions';
-import { loginToServer } from '../API/';
+import { loginAction, logoutAction, addSites } from './actions';
+import { loginToServer, getSites } from '../API/';
 
 class Welcome extends Component {
   componentWillMount() {
+    this.getAllSites();
     this.checkUserLoginStatus();
+  }
+
+  getAllSites = async () => {
+    const sites = await getSites();
+    this.props.addSites(sites);
   }
 
   checkUserLoginStatus = () => {
@@ -80,7 +86,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginAction: user => (dispatch(loginAction(user)))
+  loginAction: user => (dispatch(loginAction(user))),
+  addSites: sites => (dispatch(loginAction(sites)))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Welcome));

@@ -10,3 +10,11 @@ export const user = (store = {}, action) => {
     return store;
   }
 };
+export const sites = (store = [], action) => {
+  switch (action.type) {
+  case 'ADD_SITES':
+    return [...action.sites];
+  default:
+    return store;
+  }
+};

@@ -7,3 +7,8 @@ export const logoutAction = user => ({
   type: 'CLEAR_USER',
   user
 });
+
+export const addSites = sites => ({
+  type: 'ADD_SITES',
+  sites
+});
