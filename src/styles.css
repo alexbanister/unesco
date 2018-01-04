@@ -1,10 +1,16 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css";
 @import url(./App/styles.css);
+@import url(./Welcome/styles.css);
 @import url(./Dashboard/styles.css);
 @import url(./SiteList/styles.css);
 @import url(./Profile/styles.css);
 @import url(./Header/styles.css);
 @import url(./Nav/styles.css);
-body {
+* {
   margin: 0;
   padding: 0;
   font-family: sans-serif; }
+
+body {
+  height: 100vh;
+  width: 100%; }

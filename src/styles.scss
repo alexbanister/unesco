@@ -1,12 +1,19 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css";
 @import "./App/styles.css";
+@import "./Welcome/styles.css";
 @import "./Dashboard/styles.css";
 @import "./SiteList/styles.css";
 @import "./Profile/styles.css";
 @import "./Header/styles.css";
 @import "./Nav/styles.css";
 
-body {
+* {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
 }

@@ -1,6 +1,92 @@
 @import "../variables.scss";
 
-#root {
-  background: $percent20;
-  text-align: center;
+%login-button {
+  height: 5rem;
+  width: 50%;
+  margin-left: 25%;
+  font-size: 1.5em;
+  color: whitesmoke;
+  background-repeat: no-repeat;
+  background-position: -10% 50%;
+  background-size: 40% 40%;
+  border-radius: 12px;
+  border: none;
+
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 12.5%;
+}
+
+.welcome,
+.welcome__cover {
+  height: 100vh;
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
+.welcome__content {
+  width: 50%;
+}
+
+.welcome__logo__container {
+  margin-bottom: 5%;
+}
+
+.welcome__text__container {
+  margin-bottom: 5%;
+}
+
+.welcome__text {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: $welcome-text;
+}
+
+.welcome__button__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome__button__google,
+.welcome__button__twitter {
+  margin-bottom: 20px;
+}
+
+.welcome__button__google {
+  @extend %login-button;
+  background-color: $google;
+  background-image: url('../assets/icons/google-logo-white.svg');
+  border-bottom: 3px solid $google-dark;
+}
+
+.welcome__button__google:hover {
+  background-color: $google-dark;
+  border-bottom: 3px solid $google;
+}
+
+.welcome__button__twitter {
+  @extend %login-button;
+  background-color: $twitter;
+  background-image: url('../assets/icons/twitter-logo-white.svg');
+  border-bottom: 3px solid $twitter-dark;
+}
+
+.welcome__button__twitter:hover {
+  background-color: $twitter-dark;
+  border-bottom: 3px solid $twitter;
+}
+
+.welcome__button__facebook {
+  @extend %login-button;
+  background-color: $facebook;
+  background-image: url('../assets/icons/facebook-logo-white.svg');
+  border-bottom: 3px solid $facebook-dark;
+}
+
+.welcome__button__facebook:hover {
+  background-color: $facebook-dark;
+  border-bottom: 3px solid $facebook;
 }
