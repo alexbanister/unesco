@@ -6,6 +6,7 @@
 @import url(./Profile/styles.css);
 @import url(./Header/styles.css);
 @import url(./Nav/styles.css);
+@import url(./Search/styles.css);
 * {
   margin: 0;
   padding: 0;
