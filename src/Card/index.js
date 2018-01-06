@@ -17,7 +17,7 @@ class Card extends Component {
         if (img) {
           return commons(img, commons.sizes.medium);
         }
-        return 'no-image.png';
+        return `${process.env.PUBLIC_URL}/images/no-image.png`;
       })
       .then(img => img);
     this.setState({ img: url });
