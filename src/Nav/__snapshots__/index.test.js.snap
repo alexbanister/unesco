@@ -80,6 +80,19 @@ ShallowWrapper {
                         profile
                 </NavLink>
         </li>
+        <li
+                className="nav__list__item"
+        >
+                <NavLink
+                        activeClassName="active"
+                        ariaCurrent="true"
+                        className="nav__link"
+                        onClick={[Function]}
+                        to="/"
+                >
+                        log out
+                </NavLink>
+        </li>
 </ul>,
       "className": "nav",
     },
@@ -148,6 +161,19 @@ ShallowWrapper {
                         to="/profile"
             >
                         profile
+            </NavLink>
+</li>,
+          <li
+            className="nav__list__item"
+>
+            <NavLink
+                        activeClassName="active"
+                        ariaCurrent="true"
+                        className="nav__link"
+                        onClick={[Function]}
+                        to="/"
+            >
+                        log out
             </NavLink>
 </li>,
         ],
@@ -320,6 +346,41 @@ ShallowWrapper {
           },
           "type": "li",
         },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <NavLink
+              activeClassName="active"
+              ariaCurrent="true"
+              className="nav__link"
+              onClick={[Function]}
+              to="/"
+>
+              log out
+</NavLink>,
+            "className": "nav__list__item",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "activeClassName": "active",
+              "ariaCurrent": "true",
+              "children": "log out",
+              "className": "nav__link",
+              "onClick": [Function],
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "log out",
+            "type": [Function],
+          },
+          "type": "li",
+        },
       ],
       "type": "ul",
     },
@@ -394,6 +455,19 @@ ShallowWrapper {
                               profile
                     </NavLink>
           </li>
+          <li
+                    className="nav__list__item"
+          >
+                    <NavLink
+                              activeClassName="active"
+                              ariaCurrent="true"
+                              className="nav__link"
+                              onClick={[Function]}
+                              to="/"
+                    >
+                              log out
+                    </NavLink>
+          </li>
 </ul>,
         "className": "nav",
       },
@@ -462,6 +536,19 @@ ShallowWrapper {
                             to="/profile"
               >
                             profile
+              </NavLink>
+</li>,
+            <li
+              className="nav__list__item"
+>
+              <NavLink
+                            activeClassName="active"
+                            ariaCurrent="true"
+                            className="nav__link"
+                            onClick={[Function]}
+                            to="/"
+              >
+                            log out
               </NavLink>
 </li>,
           ],
@@ -630,6 +717,41 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": "profile",
+              "type": [Function],
+            },
+            "type": "li",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <NavLink
+                activeClassName="active"
+                ariaCurrent="true"
+                className="nav__link"
+                onClick={[Function]}
+                to="/"
+>
+                log out
+</NavLink>,
+              "className": "nav__list__item",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "activeClassName": "active",
+                "ariaCurrent": "true",
+                "children": "log out",
+                "className": "nav__link",
+                "onClick": [Function],
+                "to": "/",
+              },
+              "ref": null,
+              "rendered": "log out",
               "type": [Function],
             },
             "type": "li",

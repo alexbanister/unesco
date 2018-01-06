@@ -1,5 +1,12 @@
 @import "../variables.scss";
 
+a {
+  color: $highlight;
+  text-decoration: none;
+  &:hover {
+    color: $highlight-secondary;
+  }
+}
 .tooltip {
     position: relative;
     display: inline-block;

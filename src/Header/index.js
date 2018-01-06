@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import firebase from 'firebase';
 import { logoutAction, addSites } from '../Welcome/actions';
 import Nav from '../Nav/';
 import { getSites } from '../API/';
@@ -35,23 +34,21 @@ class Header extends Component {
       localStorage.setItem('UNESCO_sites', JSON.stringify(sites.sites));
     }
   }
+
+  getBackground() {
+    const imgNum = Math.floor((Math.random() * 13) + 1);
+    return { backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)` };
+  }
+
   render() {
     return (
-      <header className='header'>
-        <img className='header__logo'src={require('../assets/icons/traveler-logo.svg')} alt="traveler logo" />
-        <section className='nav__container'>
-          <Nav title={this.props.title}/>
-        </section>
-        <button onClick={() => {
-          firebase.auth().signOut()
-            .then(() => {
-              this.props.logoutAction();
-              this.props.history.push('/');
-            })
-            .catch(error => error);
-        }}>
-          log out
-        </button>
+      <header className='header' style={this.getBackground()}>
+        <div className="header__cover">
+          <img className='header__logo' src={require('../assets/icons/traveler-logo.svg')} alt="traveler logo" />
+          <section className='nav__container'>
+            <Nav title={this.props.title}/>
+          </section>
+        </div>
       </header>
     );
   }

@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 15rem auto 8rem auto auto;
-  box-shadow: 5px 5px 25px #384E5E;
+  box-shadow: 5px 5px 25px #202a25;
   background: white;
   padding-bottom: .5rem; }
   .site-card .hero {

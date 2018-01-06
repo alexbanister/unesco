@@ -26,21 +26,23 @@
 }
 
 .nav__link:hover{
-  color: $nav-link-highlight;
+  color: $highlight;
 }
 
 .nav__link {
   height: 100%;
+  padding: 1rem;
+  font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $nav-link;
+  color: $dark;
 }
 
 .nav-link--selected {
-  color: $nav-link-highlight;
-  border-bottom: 4px solid $nav-link-highlight;
+  color: $highlight;
+  border-bottom: 4px solid $highlight;
   margin-bottom: -4px;
 }
