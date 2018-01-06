@@ -16,3 +16,14 @@
   .site-card a {
     text-align: right;
     font-weight: bold; }
+  .site-card .icons {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .site-card .icons .fav, .site-card .icons .visited, .site-card .icons .want {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: .5rem; }

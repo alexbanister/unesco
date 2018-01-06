@@ -36,7 +36,15 @@ class Card extends Component {
         <p>{this.props.site.description.replace(/<[^>]+>/g, '')}</p>
         <Link to="">...More</Link>
         <div className="icons">
-          <img />
+          <div className="fav" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/fav.svg`
+          }}></div>
+          <div className="visited" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/visited.svg`
+          }}></div>
+          <div className="want" style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/want.svg`
+          }}></div>
         </div>
       </article>
     );

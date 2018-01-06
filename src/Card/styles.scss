@@ -22,4 +22,17 @@
     text-align: right;
     font-weight: bold;
   }
+  .icons {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .fav, .visited, .want {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: .5rem;
+    }
+  }
 }
