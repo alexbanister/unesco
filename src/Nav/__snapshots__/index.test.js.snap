@@ -18,60 +18,70 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <ul
-        className="header__nav__list"
+        className="nav__list"
 >
         <li
-                className="header__nav__list__item"
+                className="nav__list__item"
         >
-                <Link
-                        replace={false}
+                <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link"
                         to="/dashboard"
                 >
                         dashboard
-                </Link>
+                </NavLink>
         </li>
         <li
-                className="header__nav__list"
+                className="nav__list__item"
         >
-                <Link
-                        replace={false}
+                <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link"
                         to="/favorites"
                 >
                         favorites
-                </Link>
+                </NavLink>
         </li>
         <li
-                className="header__nav__list"
+                className="nav__list__item"
         >
-                <Link
-                        replace={false}
+                <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link"
                         to="/visited"
                 >
                         visited
-                </Link>
+                </NavLink>
         </li>
         <li
-                className="header__nav__list"
+                className="nav__list__item"
         >
-                <Link
-                        replace={false}
+                <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link wants"
                         to="/wants"
                 >
                         want to go
-                </Link>
+                </NavLink>
         </li>
         <li
-                className="header__nav__list"
+                className="nav__list__item"
         >
-                <Link
-                        replace={false}
+                <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link profile"
                         to="/profile"
                 >
                         profile
-                </Link>
+                </NavLink>
         </li>
 </ul>,
-      "className": "header__nav",
+      "className": "nav",
     },
     "ref": null,
     "rendered": Object {
@@ -81,57 +91,67 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <li
-            className="header__nav__list__item"
+            className="nav__list__item"
 >
-            <Link
-                        replace={false}
+            <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link"
                         to="/dashboard"
             >
                         dashboard
-            </Link>
+            </NavLink>
 </li>,
           <li
-            className="header__nav__list"
+            className="nav__list__item"
 >
-            <Link
-                        replace={false}
+            <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link"
                         to="/favorites"
             >
                         favorites
-            </Link>
+            </NavLink>
 </li>,
           <li
-            className="header__nav__list"
+            className="nav__list__item"
 >
-            <Link
-                        replace={false}
+            <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link"
                         to="/visited"
             >
                         visited
-            </Link>
+            </NavLink>
 </li>,
           <li
-            className="header__nav__list"
+            className="nav__list__item"
 >
-            <Link
-                        replace={false}
+            <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link wants"
                         to="/wants"
             >
                         want to go
-            </Link>
+            </NavLink>
 </li>,
           <li
-            className="header__nav__list"
+            className="nav__list__item"
 >
-            <Link
-                        replace={false}
+            <NavLink
+                        activeClassName="nav-link--selected"
+                        ariaCurrent="true"
+                        className="nav__link profile"
                         to="/profile"
             >
                         profile
-            </Link>
+            </NavLink>
 </li>,
         ],
-        "className": "header__nav__list",
+        "className": "nav__list",
       },
       "ref": null,
       "rendered": Array [
@@ -140,22 +160,26 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <Link
-              replace={false}
+            "children": <NavLink
+              activeClassName="nav-link--selected"
+              ariaCurrent="true"
+              className="nav__link"
               to="/dashboard"
 >
               dashboard
-</Link>,
-            "className": "header__nav__list__item",
+</NavLink>,
+            "className": "nav__list__item",
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
+              "activeClassName": "nav-link--selected",
+              "ariaCurrent": "true",
               "children": "dashboard",
-              "replace": false,
+              "className": "nav__link",
               "to": "/dashboard",
             },
             "ref": null,
@@ -169,22 +193,26 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <Link
-              replace={false}
+            "children": <NavLink
+              activeClassName="nav-link--selected"
+              ariaCurrent="true"
+              className="nav__link"
               to="/favorites"
 >
               favorites
-</Link>,
-            "className": "header__nav__list",
+</NavLink>,
+            "className": "nav__list__item",
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
+              "activeClassName": "nav-link--selected",
+              "ariaCurrent": "true",
               "children": "favorites",
-              "replace": false,
+              "className": "nav__link",
               "to": "/favorites",
             },
             "ref": null,
@@ -198,22 +226,26 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <Link
-              replace={false}
+            "children": <NavLink
+              activeClassName="nav-link--selected"
+              ariaCurrent="true"
+              className="nav__link"
               to="/visited"
 >
               visited
-</Link>,
-            "className": "header__nav__list",
+</NavLink>,
+            "className": "nav__list__item",
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
+              "activeClassName": "nav-link--selected",
+              "ariaCurrent": "true",
               "children": "visited",
-              "replace": false,
+              "className": "nav__link",
               "to": "/visited",
             },
             "ref": null,
@@ -227,22 +259,26 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <Link
-              replace={false}
+            "children": <NavLink
+              activeClassName="nav-link--selected"
+              ariaCurrent="true"
+              className="nav__link wants"
               to="/wants"
 >
               want to go
-</Link>,
-            "className": "header__nav__list",
+</NavLink>,
+            "className": "nav__list__item",
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
+              "activeClassName": "nav-link--selected",
+              "ariaCurrent": "true",
               "children": "want to go",
-              "replace": false,
+              "className": "nav__link wants",
               "to": "/wants",
             },
             "ref": null,
@@ -256,22 +292,26 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <Link
-              replace={false}
+            "children": <NavLink
+              activeClassName="nav-link--selected"
+              ariaCurrent="true"
+              className="nav__link profile"
               to="/profile"
 >
               profile
-</Link>,
-            "className": "header__nav__list",
+</NavLink>,
+            "className": "nav__list__item",
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
+              "activeClassName": "nav-link--selected",
+              "ariaCurrent": "true",
               "children": "profile",
-              "replace": false,
+              "className": "nav__link profile",
               "to": "/profile",
             },
             "ref": null,
@@ -292,60 +332,70 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <ul
-          className="header__nav__list"
+          className="nav__list"
 >
           <li
-                    className="header__nav__list__item"
+                    className="nav__list__item"
           >
-                    <Link
-                              replace={false}
+                    <NavLink
+                              activeClassName="nav-link--selected"
+                              ariaCurrent="true"
+                              className="nav__link"
                               to="/dashboard"
                     >
                               dashboard
-                    </Link>
+                    </NavLink>
           </li>
           <li
-                    className="header__nav__list"
+                    className="nav__list__item"
           >
-                    <Link
-                              replace={false}
+                    <NavLink
+                              activeClassName="nav-link--selected"
+                              ariaCurrent="true"
+                              className="nav__link"
                               to="/favorites"
                     >
                               favorites
-                    </Link>
+                    </NavLink>
           </li>
           <li
-                    className="header__nav__list"
+                    className="nav__list__item"
           >
-                    <Link
-                              replace={false}
+                    <NavLink
+                              activeClassName="nav-link--selected"
+                              ariaCurrent="true"
+                              className="nav__link"
                               to="/visited"
                     >
                               visited
-                    </Link>
+                    </NavLink>
           </li>
           <li
-                    className="header__nav__list"
+                    className="nav__list__item"
           >
-                    <Link
-                              replace={false}
+                    <NavLink
+                              activeClassName="nav-link--selected"
+                              ariaCurrent="true"
+                              className="nav__link wants"
                               to="/wants"
                     >
                               want to go
-                    </Link>
+                    </NavLink>
           </li>
           <li
-                    className="header__nav__list"
+                    className="nav__list__item"
           >
-                    <Link
-                              replace={false}
+                    <NavLink
+                              activeClassName="nav-link--selected"
+                              ariaCurrent="true"
+                              className="nav__link profile"
                               to="/profile"
                     >
                               profile
-                    </Link>
+                    </NavLink>
           </li>
 </ul>,
-        "className": "header__nav",
+        "className": "nav",
       },
       "ref": null,
       "rendered": Object {
@@ -355,57 +405,67 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <li
-              className="header__nav__list__item"
+              className="nav__list__item"
 >
-              <Link
-                            replace={false}
+              <NavLink
+                            activeClassName="nav-link--selected"
+                            ariaCurrent="true"
+                            className="nav__link"
                             to="/dashboard"
               >
                             dashboard
-              </Link>
+              </NavLink>
 </li>,
             <li
-              className="header__nav__list"
+              className="nav__list__item"
 >
-              <Link
-                            replace={false}
+              <NavLink
+                            activeClassName="nav-link--selected"
+                            ariaCurrent="true"
+                            className="nav__link"
                             to="/favorites"
               >
                             favorites
-              </Link>
+              </NavLink>
 </li>,
             <li
-              className="header__nav__list"
+              className="nav__list__item"
 >
-              <Link
-                            replace={false}
+              <NavLink
+                            activeClassName="nav-link--selected"
+                            ariaCurrent="true"
+                            className="nav__link"
                             to="/visited"
               >
                             visited
-              </Link>
+              </NavLink>
 </li>,
             <li
-              className="header__nav__list"
+              className="nav__list__item"
 >
-              <Link
-                            replace={false}
+              <NavLink
+                            activeClassName="nav-link--selected"
+                            ariaCurrent="true"
+                            className="nav__link wants"
                             to="/wants"
               >
                             want to go
-              </Link>
+              </NavLink>
 </li>,
             <li
-              className="header__nav__list"
+              className="nav__list__item"
 >
-              <Link
-                            replace={false}
+              <NavLink
+                            activeClassName="nav-link--selected"
+                            ariaCurrent="true"
+                            className="nav__link profile"
                             to="/profile"
               >
                             profile
-              </Link>
+              </NavLink>
 </li>,
           ],
-          "className": "header__nav__list",
+          "className": "nav__list",
         },
         "ref": null,
         "rendered": Array [
@@ -414,22 +474,26 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <Link
-                replace={false}
+              "children": <NavLink
+                activeClassName="nav-link--selected"
+                ariaCurrent="true"
+                className="nav__link"
                 to="/dashboard"
 >
                 dashboard
-</Link>,
-              "className": "header__nav__list__item",
+</NavLink>,
+              "className": "nav__list__item",
             },
             "ref": null,
             "rendered": Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
+                "activeClassName": "nav-link--selected",
+                "ariaCurrent": "true",
                 "children": "dashboard",
-                "replace": false,
+                "className": "nav__link",
                 "to": "/dashboard",
               },
               "ref": null,
@@ -443,22 +507,26 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <Link
-                replace={false}
+              "children": <NavLink
+                activeClassName="nav-link--selected"
+                ariaCurrent="true"
+                className="nav__link"
                 to="/favorites"
 >
                 favorites
-</Link>,
-              "className": "header__nav__list",
+</NavLink>,
+              "className": "nav__list__item",
             },
             "ref": null,
             "rendered": Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
+                "activeClassName": "nav-link--selected",
+                "ariaCurrent": "true",
                 "children": "favorites",
-                "replace": false,
+                "className": "nav__link",
                 "to": "/favorites",
               },
               "ref": null,
@@ -472,22 +540,26 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <Link
-                replace={false}
+              "children": <NavLink
+                activeClassName="nav-link--selected"
+                ariaCurrent="true"
+                className="nav__link"
                 to="/visited"
 >
                 visited
-</Link>,
-              "className": "header__nav__list",
+</NavLink>,
+              "className": "nav__list__item",
             },
             "ref": null,
             "rendered": Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
+                "activeClassName": "nav-link--selected",
+                "ariaCurrent": "true",
                 "children": "visited",
-                "replace": false,
+                "className": "nav__link",
                 "to": "/visited",
               },
               "ref": null,
@@ -501,22 +573,26 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <Link
-                replace={false}
+              "children": <NavLink
+                activeClassName="nav-link--selected"
+                ariaCurrent="true"
+                className="nav__link wants"
                 to="/wants"
 >
                 want to go
-</Link>,
-              "className": "header__nav__list",
+</NavLink>,
+              "className": "nav__list__item",
             },
             "ref": null,
             "rendered": Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
+                "activeClassName": "nav-link--selected",
+                "ariaCurrent": "true",
                 "children": "want to go",
-                "replace": false,
+                "className": "nav__link wants",
                 "to": "/wants",
               },
               "ref": null,
@@ -530,22 +606,26 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <Link
-                replace={false}
+              "children": <NavLink
+                activeClassName="nav-link--selected"
+                ariaCurrent="true"
+                className="nav__link profile"
                 to="/profile"
 >
                 profile
-</Link>,
-              "className": "header__nav__list",
+</NavLink>,
+              "className": "nav__list__item",
             },
             "ref": null,
             "rendered": Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
+                "activeClassName": "nav-link--selected",
+                "ariaCurrent": "true",
                 "children": "profile",
-                "replace": false,
+                "className": "nav__link profile",
                 "to": "/profile",
               },
               "ref": null,

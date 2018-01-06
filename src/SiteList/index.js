@@ -7,9 +7,11 @@ import Header from '../Header/';
 class SiteList extends Component {
   render() {
     return (
-      <div>
-        <h3>favs</h3>
-        <Header />
+      <div className='site-list'>
+        <section className='header__container'>
+          <Header title={this.props.title}/>
+        </section>
+        <section className='site-list__content'></section>
       </div>
     );
   }
