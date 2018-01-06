@@ -3,7 +3,8 @@
   grid-template-columns: 100%;
   grid-template-rows: 15rem auto 8rem auto auto;
   box-shadow: 5px 5px 25px #384E5E;
-  background: white; }
+  background: white;
+  padding-bottom: .5rem; }
   .site-card .hero {
     background-size: cover;
     background-position: center;
@@ -27,3 +28,17 @@
       width: 2.5rem;
       height: 2.5rem;
       margin: .5rem; }
+      .site-card .icons .fav:hover, .site-card .icons .visited:hover, .site-card .icons .want:hover {
+        cursor: pointer; }
+    .site-card .icons .fav {
+      background-image: url("../assets/icons/fav.svg"); }
+      .site-card .icons .fav:hover {
+        background-image: url("../assets/icons/fav-on.svg"); }
+    .site-card .icons .visited {
+      background-image: url("../assets/icons/visited.svg"); }
+      .site-card .icons .visited:hover {
+        background-image: url("../assets/icons/visited-on.svg"); }
+    .site-card .icons .want {
+      background-image: url("../assets/icons/want.svg"); }
+      .site-card .icons .want:hover {
+        background-image: url("../assets/icons/want-on.svg"); }
