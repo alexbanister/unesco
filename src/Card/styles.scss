@@ -1,3 +1,25 @@
+@import "../variables.scss";
+
 .site-card {
-  
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 15rem auto 8rem auto auto;
+  box-shadow: $shadow;
+  background: white;
+  .hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  h3, p, a {
+    padding: .5rem;
+  }
+  p {
+    overflow: hidden;
+    line-height: 1.5rem;
+  }
+  a {
+    text-align: right;
+    font-weight: bold;
+  }
 }

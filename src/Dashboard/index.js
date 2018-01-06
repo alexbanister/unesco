@@ -38,8 +38,12 @@ class Dashboard extends Component {
             <h2>{this.getCounts('wants')}</h2>
           </div>
         </div>
-        <div className='random-cards'>
+        <div className="main-container">
           {this.getRandomCard()}
+          {this.getRandomCard()}
+          <div className="dashboard-search">
+            search
+          </div>
         </div>
       </div>
     );

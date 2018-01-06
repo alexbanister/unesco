@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
+import { withRouter, Link } from 'react-router-dom';
 import heritageImage from 'world-heritage-image';
 import commons from 'commons-photo-url';
 
@@ -20,14 +21,23 @@ class Card extends Component {
         return `${process.env.PUBLIC_URL}/images/no-image.png`;
       })
       .then(img => img);
-    this.setState({ img: url });
+    this.setState({
+      heroStyle: {
+        backgroundImage: `url(${url})`
+      }
+    });
   }
 
   render() {
     return (
       <article className="site-card">
-        {this.props.site.name}
-        <img src={this.state.img} alt="hi" />;
+        <div style={ this.state.heroStyle } className="hero"></div>
+        <h3>{this.props.site.name.replace(/<[^>]+>/g, '')}</h3>
+        <p>{this.props.site.description.replace(/<[^>]+>/g, '')}</p>
+        <Link to="">...More</Link>
+        <div className="icons">
+          <img />
+        </div>
       </article>
     );
   }
@@ -35,4 +45,4 @@ class Card extends Component {
 
 Card.propTypes = {};
 
-export default Card;
+export default withRouter(Card);

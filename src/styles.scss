@@ -1,5 +1,6 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css";
 @import "https://fonts.googleapis.com/css?family=Raleway:300,400,800";
+@import "./variables.scss";
 @import "./App/styles.css";
 @import "./Welcome/styles.css";
 @import "./Dashboard/styles.css";
@@ -7,6 +8,7 @@
 @import "./Profile/styles.css";
 @import "./Header/styles.css";
 @import "./Nav/styles.css";
+@import "./Card/styles.css";
 
 * {
   margin: 0;
@@ -16,5 +18,6 @@
 
 body {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
+  background: $background;
 }

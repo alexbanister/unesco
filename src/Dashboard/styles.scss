@@ -10,6 +10,7 @@
 }
 .callout {
   margin: 0 1rem;
+  text-align: center;
   h3 {
     font-weight: 300;
     font-size: 1.25rem;
@@ -21,4 +22,13 @@
     margin: 1rem;
     margin-bottom: 2rem;
   }
+}
+.main-container {
+  width: 1024px;
+  margin: auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
 }

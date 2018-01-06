@@ -1,0 +1,18 @@
+.site-card {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 15rem auto 8rem auto auto;
+  box-shadow: 5px 5px 25px #384E5E;
+  background: white; }
+  .site-card .hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; }
+  .site-card h3, .site-card p, .site-card a {
+    padding: .5rem; }
+  .site-card p {
+    overflow: hidden;
+    line-height: 1.5rem; }
+  .site-card a {
+    text-align: right;
+    font-weight: bold; }
