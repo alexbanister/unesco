@@ -1,3 +1,9 @@
+a {
+  color: #5b92e5;
+  text-decoration: none; }
+  a:hover {
+    color: #C08497; }
+
 .tooltip {
   position: relative;
   display: inline-block; }

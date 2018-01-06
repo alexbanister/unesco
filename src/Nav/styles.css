@@ -21,18 +21,20 @@
   justify-content: center; }
 
 .nav__link:hover {
-  color: #5B92E5; }
+  color: #5b92e5; }
 
 .nav__link {
   height: 100%;
+  padding: 1rem;
+  font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #343434; }
+  color: #202a25; }
 
 .nav-link--selected {
-  color: #5B92E5;
-  border-bottom: 4px solid #5B92E5;
+  color: #5b92e5;
+  border-bottom: 4px solid #5b92e5;
   margin-bottom: -4px; }
