@@ -1,4 +1,5 @@
 /* eslint no-unused-vars: 0 */
+/* eslint global-require: 0 */
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -36,9 +37,11 @@ class Header extends Component {
   }
   render() {
     return (
-      <header>
-        <img src="" alt="" />
-        <Nav />
+      <header className='header'>
+        <img className='header__logo'src={require('../assets/icons/traveler-logo.svg')} alt="traveler logo" />
+        <section className='nav__container'>
+          <Nav title={this.props.title}/>
+        </section>
         <button onClick={() => {
           firebase.auth().signOut()
             .then(() => {

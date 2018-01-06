@@ -20,6 +20,10 @@ $highlight: #F6D22F;
 $shadow: 5px 5px 25px $body-dark;
 $glow: 0 0 15px $highlight-dark;
 
+$nav-link: #343434;
+
+$nav-link-highlight: #5B92E5;
+
 @mixin radial-gradient($color2, $color1) {
   background: $color1;
   background: -moz-radial-gradient(center, ellipse cover, $color1 18%, $color2 100%);

@@ -1,12 +1,13 @@
 .welcome__button__google, .welcome__button__twitter, .welcome__button__facebook {
+  transition-duration: 0.3s;
   height: 5rem;
   width: 50%;
   margin-left: 25%;
   font-size: 1.5em;
   color: whitesmoke;
   background-repeat: no-repeat;
-  background-position: -10% 50%;
-  background-size: 40% 40%;
+  background-position: -15% 50%;
+  background-size: 45% 45%;
   border-radius: 12px;
   border: none;
   display: flex;
@@ -23,13 +24,11 @@
   align-items: center; }
 
 .welcome__content {
-  width: 50%; }
+  width: 45%; }
 
-.welcome__logo__container {
-  margin-bottom: 5%; }
-
+.welcome__logo__container,
 .welcome__text__container {
-  margin-bottom: 5%; }
+  margin-bottom: 2%; }
 
 .welcome__text {
   font-size: 1.2em;
@@ -42,31 +41,34 @@
 
 .welcome__button__google,
 .welcome__button__twitter {
-  margin-bottom: 20px; }
+  margin-bottom: 4%; }
 
 .welcome__button__google {
   background-color: #e8453c;
-  background-image: url("../assets/icons/google-logo-white.svg");
+  background-image: url("../assets/icons/google-logo-dark.svg");
   border-bottom: 3px solid #a72719; }
 
 .welcome__button__google:hover {
   background-color: #a72719;
+  background-image: url("../assets/icons/google-logo-white.svg");
   border-bottom: 3px solid #e8453c; }
 
 .welcome__button__twitter {
   background-color: #1da1f2;
-  background-image: url("../assets/icons/twitter-logo-white.svg");
+  background-image: url("../assets/icons/twitter-logo-dark.svg");
   border-bottom: 3px solid #0f75b8; }
 
 .welcome__button__twitter:hover {
   background-color: #0f75b8;
+  background-image: url("../assets/icons/twitter-logo-white.svg");
   border-bottom: 3px solid #1da1f2; }
 
 .welcome__button__facebook {
   background-color: #3b5998;
-  background-image: url("../assets/icons/facebook-logo-white.svg");
+  background-image: url("../assets/icons/facebook-logo-dark.svg");
   border-bottom: 3px solid #28417b; }
 
 .welcome__button__facebook:hover {
   background-color: #28417b;
+  background-image: url("../assets/icons/facebook-logo-white.svg");
   border-bottom: 3px solid #3b5998; }
