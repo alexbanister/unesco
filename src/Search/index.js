@@ -40,7 +40,6 @@ class Search extends Component {
     case 'region':
       const filteredRegions = sites.filter(site => site.region === searchTerm);
       this.props.setSearch(filteredRegions);
-      console.log('filtered: ', filteredRegions);
       break;
     default:
       const filteredNames = sites.filter(site => site.name.toLowerCase().includes(searchTerm));
