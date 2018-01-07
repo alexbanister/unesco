@@ -43,7 +43,7 @@ class Header extends Component {
   getBackground() {
     const imgNum = Math.floor((Math.random() * 13) + 1);
     return { backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)` };
-  };
+  }
 
   setCountryAndRegionLists = () => {
     const { sites } = this.props;
@@ -63,7 +63,6 @@ class Header extends Component {
 
     this.props.setRegions(regionList);
     this.props.setCountries(countryList);
-
   }
 
   render() {
