@@ -1,4 +1,4 @@
-.welcome__button__google, .welcome__button__twitter, .welcome__button__facebook {
+.welcome__button__google, .welcome__button__twitter, .welcome__button__facebook, .welcome__button__github {
   transition-duration: 0.3s;
   height: 5rem;
   width: 30rem;
@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   padding-left: 4rem; }
-  .welcome__button__google:hover, .welcome__button__twitter:hover, .welcome__button__facebook:hover {
+  .welcome__button__google:hover, .welcome__button__twitter:hover, .welcome__button__facebook:hover, .welcome__button__github:hover {
     cursor: pointer; }
 
 .welcome {
@@ -54,8 +54,9 @@
   flex-direction: column; }
 
 .welcome__button__google,
-.welcome__button__twitter {
-  margin-bottom: 4%; }
+.welcome__button__twitter,
+.welcome__button__facebook {
+  margin-bottom: 1%; }
 
 .welcome__button__google {
   background-color: #e8453c;
@@ -86,3 +87,13 @@
   background-color: #28417b;
   background-image: url("../assets/icons/facebook-logo-white.svg");
   border-bottom: 3px solid #3b5998; }
+
+.welcome__button__github {
+  background-color: #444444;
+  background-image: url("../assets/icons/github-logo-dark.svg");
+  border-bottom: 3px solid #262626; }
+
+.welcome__button__github:hover {
+  background-color: #262626;
+  background-image: url("../assets/icons/github-logo-white.svg");
+  border-bottom: 3px solid #444444; }

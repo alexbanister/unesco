@@ -15,8 +15,8 @@ export const user = (store = {}, action) => {
       store,
       { [action.flag.flagType]: [...store[action.flag.flagType], action.flag.id] }
     );
-    case 'SET_SEARCH':
-      return Object.assign({}, store, { search: action.search });
+  case 'SET_SEARCH':
+    return Object.assign({}, store, { search: action.search });
   default:
     return store;
   }

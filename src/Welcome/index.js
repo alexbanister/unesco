@@ -55,7 +55,8 @@ class Welcome extends Component {
     const provider = {
       google: new firebase.auth.GoogleAuthProvider(),
       facebook: new firebase.auth.FacebookAuthProvider(),
-      twitter: new firebase.auth.TwitterAuthProvider()
+      twitter: new firebase.auth.TwitterAuthProvider(),
+      github: new firebase.auth.GithubAuthProvider()
     };
 
     if (!currentUser) {
@@ -76,7 +77,6 @@ class Welcome extends Component {
         })
         .catch(error => error);
     }
-
     return currentUser.linkWithPopup(provider[authSrc])
       .catch(error => error);
   }
@@ -116,6 +116,11 @@ class Welcome extends Component {
                 className='welcome__button__facebook'
                 onClick={() => this.continueLogin('facebook')}>
                 Continue With Facebook
+              </button>
+              <button
+                className='welcome__button__github'
+                onClick={() => this.continueLogin('github')}>
+                Continue With GitHub
               </button>
             </article>
           </section>
