@@ -81,6 +81,7 @@ class Header extends Component {
           <img className='header__logo' src={require('../assets/icons/traveler-logo.svg')} alt="traveler logo" />
           <section className='nav__container'>
             <Nav title={this.props.title}/>
+            <Search />
           </section>
         </div>
       </header>
