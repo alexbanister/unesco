@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import heritageImage from 'world-heritage-image';
 import commons from 'commons-photo-url';
+import { removeFlag, addFlag } from './actions';
+import { addFlagFetch, removeFlagFetch } from '../API/';
 
 class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      img: ''
+      heroStyle: {},
+      favoritesText: 'OMG! My Favorite',
+      favoritesOnText: 'Not my Favorite',
+      visitedText: 'Been there, Done That!',
+      visitedOnText: 'Nope! Haven\'t been.',
+      wantsText: 'I want to go!',
+      wantsOnText: 'I don\'t want to go.'
     };
   }
 
@@ -28,6 +37,35 @@ class Card extends Component {
     });
   }
 
+  setIcon(flagType, siteId, userId) {
+    if (this.props.user[flagType].includes(siteId)) {
+      return (
+        <div
+          className={`${flagType}-on tooltip`}
+          onClick={() => this.flagOff(flagType, siteId, userId)}>
+          <span className="tooltiptext">{this.state[`${flagType}OnText`]}</span>
+        </div>
+      );
+    }
+    return (
+      <div
+        className={`${flagType} tooltip`}
+        onClick={() => this.flagOn(flagType, siteId, userId)}>
+        <span className="tooltiptext">{this.state[`${flagType}Text`]}</span>
+      </div>
+    );
+  }
+
+  flagOff(flagType, id, userId) {
+    removeFlagFetch(flagType, id, userId);
+    this.props.removeFlag({ flagType, id });
+  }
+
+  flagOn(flagType, id, userId) {
+    addFlagFetch(flagType, id, userId);
+    this.props.addFlag({ flagType, id });
+  }
+
   render() {
     return (
       <article className="site-card">
@@ -36,15 +74,9 @@ class Card extends Component {
         <p>{this.props.site.description.replace(/<[^>]+>/g, '')}</p>
         <Link to="">...More</Link>
         <div className="icons">
-          <div className="fav tooltip">
-            <span className="tooltiptext">OMG! My Favorite</span>
-          </div>
-          <div className="visited tooltip">
-            <span className="tooltiptext">Been there, Done That!</span>
-          </div>
-          <div className="want tooltip">
-            <span className="tooltiptext">I want to go!</span>
-          </div>
+          {this.setIcon('favorites', this.props.site.id, this.props.user.id)}
+          {this.setIcon('visited', this.props.site.id, this.props.user.id)}
+          {this.setIcon('wants', this.props.site.id, this.props.user.id)}
         </div>
       </article>
     );
@@ -53,4 +85,13 @@ class Card extends Component {
 
 Card.propTypes = {};
 
-export default withRouter(Card);
+const mapStateToProps = store => ({
+  user: store.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  removeFlag: fav => (dispatch(removeFlag(fav))),
+  addFlag: fav => (dispatch(addFlag(fav)))
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Card));

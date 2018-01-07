@@ -6,6 +6,15 @@ export const user = (store = {}, action) => {
     return Object.assign({}, action.user);
   case 'CLEAR_USER':
     return Object.assign({});
+  case 'REMOVE_FLAG':
+    const flag = store[action.flag.flagType].filter(item => item !== action.flag.id);
+    return Object.assign({}, store, { [action.flag.flagType]: flag });
+  case 'ADD_FLAG':
+    return Object.assign(
+      {},
+      store,
+      { [action.flag.flagType]: [...store[action.flag.flagType], action.flag.id] }
+    );
   default:
     return store;
   }
