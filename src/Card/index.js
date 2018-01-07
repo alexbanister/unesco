@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import heritageImage from 'world-heritage-image';
 import commons from 'commons-photo-url';
-import {
-  removeFlag,
-  addFlag
-} from './actions';
+import { removeFlag, addFlag } from './actions';
+import { addFlagFetch, removeFlagFetch } from '../API/';
 
 class Card extends Component {
   constructor(props) {
@@ -39,12 +37,12 @@ class Card extends Component {
     });
   }
 
-  setIcon(flagType, id) {
-    if (this.props.user[flagType].includes(id)) {
+  setIcon(flagType, siteId, userId) {
+    if (this.props.user[flagType].includes(siteId)) {
       return (
         <div
           className={`${flagType}-on tooltip`}
-          onClick={() => this.removeFlag(flagType, id)}>
+          onClick={() => this.flagOff(flagType, siteId, userId)}>
           <span className="tooltiptext">{this.state[`${flagType}OnText`]}</span>
         </div>
       );
@@ -52,17 +50,19 @@ class Card extends Component {
     return (
       <div
         className={`${flagType} tooltip`}
-        onClick={() => this.addFlag(flagType, id)}>
+        onClick={() => this.flagOn(flagType, siteId, userId)}>
         <span className="tooltiptext">{this.state[`${flagType}Text`]}</span>
       </div>
     );
   }
 
-  removeFlag(flagType, id) {
+  flagOff(flagType, id, userId) {
+    removeFlagFetch(flagType, id, userId);
     this.props.removeFlag({ flagType, id });
   }
 
-  addFlag(flagType, id) {
+  flagOn(flagType, id, userId) {
+    addFlagFetch(flagType, id, userId);
     this.props.addFlag({ flagType, id });
   }
 
@@ -74,9 +74,9 @@ class Card extends Component {
         <p>{this.props.site.description.replace(/<[^>]+>/g, '')}</p>
         <Link to="">...More</Link>
         <div className="icons">
-          {this.setIcon('favorites', this.props.site.id)}
-          {this.setIcon('visited', this.props.site.id)}
-          {this.setIcon('wants', this.props.site.id)}
+          {this.setIcon('favorites', this.props.site.id, this.props.user.id)}
+          {this.setIcon('visited', this.props.site.id, this.props.user.id)}
+          {this.setIcon('wants', this.props.site.id, this.props.user.id)}
         </div>
       </article>
     );
