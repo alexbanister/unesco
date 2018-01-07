@@ -26,7 +26,7 @@ class Search extends Component {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      this.handleSearch('name', this.state.search.toLowerCase());  
+      this.handleSearch('name', this.state.search.toLowerCase());
     }
   }
 

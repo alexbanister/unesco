@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 export const search = (store = [], action) => {
   switch (action.type) {
   case 'SET_SEARCH':
