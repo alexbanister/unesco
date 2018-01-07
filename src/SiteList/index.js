@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header/';
-import Search from '../Search/';
 
 class SiteList extends Component {
   render() {
@@ -13,9 +12,6 @@ class SiteList extends Component {
           <Header title={this.props.title}/>
         </section>
         <section className='site-list__content'>
-          <article className='search-container'>
-            <Search />
-          </article>
         </section>
       </div>
     );
