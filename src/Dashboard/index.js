@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header/';
 import Card from '../Card/';
+import Search from '../Search';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -59,9 +60,7 @@ class Dashboard extends Component {
         <div className="main-container">
           <Card site={this.state.card1} />
           <Card site={this.state.card2} />
-          <div className="dashboard-search">
-            search
-          </div>
+          <Search />
         </div>
       </div>
     );

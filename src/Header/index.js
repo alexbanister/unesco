@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 import { logoutAction, addSites } from '../Welcome/actions';
 import { setRegions, setCountries } from './actions';
 import Nav from '../Nav/';
-import Search from '../Search';
 import { getSites } from '../API/';
 
 class Header extends Component {
