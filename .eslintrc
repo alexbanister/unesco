@@ -40,7 +40,8 @@
     "arrow-body-style": [0],
     "no-return-assign": [0],
     "class-methods-use-this": [0],
-    "no-unused-expressions": [0]
+    "no-unused-expressions": [0],
+    "radix": [0]
   },
   "globals": {
     "expect": true

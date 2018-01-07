@@ -30,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    .fav, .visited, .want {
+    .favorites, .visited, .wants, .favorites-on, .visited-on, .wants-on {
       width: 2.5rem;
       height: 2.5rem;
       margin: .5rem;
@@ -38,10 +38,16 @@
         cursor: pointer;
       }
     }
-    .fav {
+    .favorites {
       background-image: url('../assets/icons/fav.svg');
       &:hover {
         background-image: url('../assets/icons/fav-on.svg');
+      }
+    }
+    .favorites-on {
+      background-image: url('../assets/icons/fav-on.svg');
+      &:hover {
+        background-image: url('../assets/icons/fav.svg');
       }
     }
     .visited {
@@ -50,10 +56,22 @@
         background-image: url('../assets/icons/visited-on.svg');
       }
     }
-    .want {
+    .visited-on {
+      background-image: url('../assets/icons/visited-on.svg');
+      &:hover {
+        background-image: url('../assets/icons/visited.svg');
+      }
+    }
+    .wants {
       background-image: url('../assets/icons/want.svg');
       &:hover {
         background-image: url('../assets/icons/want-on.svg');
+      }
+    }
+    .wants-on {
+      background-image: url('../assets/icons/want-on.svg');
+      &:hover {
+        background-image: url('../assets/icons/want.svg');
       }
     }
   }

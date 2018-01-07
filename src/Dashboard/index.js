@@ -20,6 +20,14 @@ class Dashboard extends Component {
     return false;
   }
 
+  displayCard(id) {
+    if (this.props.sites.length > 0) {
+      const cardSite = this.props.sites.find(site => site.id === parseInt(id));
+      return <Card site={cardSite} />;
+    }
+    return false;
+  }
+
   render() {
     return (
       <div>
@@ -39,7 +47,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="main-container">
-          {this.getRandomCard()}
+          {this.displayCard('1885')}
           {this.getRandomCard()}
           <div className="dashboard-search">
             search
