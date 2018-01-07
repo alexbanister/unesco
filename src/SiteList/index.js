@@ -21,11 +21,14 @@ class SiteList extends Component {
   }
 
   render() {
+    const sites = this.props.user[this.props.section] ?
+      this.displayCards(this.props.user[this.props.section]) :
+      [];
     return (
       <div className='site-list'>
         <Header title={this.props.title}/>
         <section className='site-list__content'>
-          {this.displayCards(this.props.user[this.props.section])}
+          {sites}
         </section>
       </div>
     );

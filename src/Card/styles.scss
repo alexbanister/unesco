@@ -7,6 +7,12 @@
   box-shadow: $shadow;
   background: white;
   padding-bottom: .5rem;
+  .loading {
+    grid-row: span 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .hero {
     background-size: cover;
     background-position: center;

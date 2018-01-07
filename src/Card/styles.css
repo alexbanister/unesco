@@ -5,6 +5,11 @@
   box-shadow: 5px 5px 25px #202a25;
   background: white;
   padding-bottom: .5rem; }
+  .site-card .loading {
+    grid-row: span 5;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
   .site-card .hero {
     background-size: cover;
     background-position: center;

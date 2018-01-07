@@ -19,20 +19,20 @@ class Card extends Component {
     };
   }
 
-  async componentWillMount() {
-    if (this.props.site.image) {
-      this.setState({
-        heroStyle: {
-          backgroundImage: `url(${this.props.site.image})`
-        }
-      });
-    } else {
-      this.setState({
-        heroStyle: {
-          backgroundImage: `${process.env.PUBLIC_URL}/images/no-image.png`
-        }
-      });
+  setHeroImage() {
+    if (this.state.heroStyle.backgroundImage) {
+      return;
     }
+
+    const img = this.props.site.image ?
+      `url(${this.props.site.image})` :
+      `url(${process.env.PUBLIC_URL}/images/no-image.png)`;
+
+    this.setState({
+      heroStyle: {
+        backgroundImage: img
+      }
+    });
   }
 
   setIcon(flagType, siteId, userId) {
@@ -64,7 +64,20 @@ class Card extends Component {
     this.props.addFlag({ flagType, id });
   }
 
-  render() {
+  drawLoading() {
+    return (
+      <article className="site-card">
+        <div className="loading">
+          <img
+            src={`${process.env.PUBLIC_URL}/images/loading.gif`}
+            alt="Loading" />
+        </div>
+      </article>
+    );
+  }
+
+  drawCard() {
+    this.setHeroImage();
     return (
       <article className="site-card">
         <div
@@ -80,6 +93,10 @@ class Card extends Component {
         </div>
       </article>
     );
+  }
+
+  render() {
+    return this.props.site ? this.drawCard() : this.drawLoading();
   }
 }
 
