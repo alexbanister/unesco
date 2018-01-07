@@ -61,9 +61,7 @@ app.post('/api/v1/users', (request, response) => {
   }
   return database('users').where('id', id).select()
     .then(async (users) => {
-      // eslint-disable-next-line
-      const { email, id, name } = users[0];
-      if (!users.length) {
+      if (users.length < 1) {
         return database('users').insert(request.body, '*')
           .then((user) => {
             // eslint-disable-next-line

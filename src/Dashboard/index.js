@@ -6,18 +6,28 @@ import Header from '../Header/';
 import Card from '../Card/';
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      card1: {},
+      card2: {}
+    };
+  }
+
+  componentWillMount() {
+    const RandomNum1 = Math.floor((Math.random() * this.props.sites.length) - 1);
+    const RandomNum2 = Math.floor((Math.random() * this.props.sites.length) - 1);
+    this.setState({
+      card1: this.props.sites[RandomNum1],
+      card2: this.props.sites[RandomNum2]
+    });
+  }
+
   getCounts = (type) => {
     if (this.props.user[type]) {
       return this.props.user[type].length;
     }
     return 0;
-  }
-  getRandomCard = () => {
-    if (this.props.sites.length !== 0) {
-      const RandomNum = Math.floor((Math.random() * this.props.sites.length) - 1);
-      return <Card site={this.props.sites[RandomNum]} />;
-    }
-    return false;
   }
 
   displayCard(id) {
@@ -47,8 +57,8 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="main-container">
-          {this.displayCard('1885')}
-          {this.getRandomCard()}
+          <Card site={this.state.card1} />
+          <Card site={this.state.card2} />
           <div className="dashboard-search">
             search
           </div>

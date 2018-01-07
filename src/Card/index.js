@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import heritageImage from 'world-heritage-image';
-import commons from 'commons-photo-url';
 import { removeFlag, addFlag } from './actions';
 import { addFlagFetch, removeFlagFetch } from '../API/';
 
@@ -22,19 +20,19 @@ class Card extends Component {
   }
 
   async componentWillMount() {
-    const url = await heritageImage(this.props.site.id)
-      .then((img) => {
-        if (img) {
-          return commons(img, commons.sizes.medium);
+    if (this.props.site.image) {
+      this.setState({
+        heroStyle: {
+          backgroundImage: `url(${this.props.site.image})`
         }
-        return `${process.env.PUBLIC_URL}/images/no-image.png`;
-      })
-      .then(img => img);
-    this.setState({
-      heroStyle: {
-        backgroundImage: `url(${url})`
-      }
-    });
+      });
+    } else {
+      this.setState({
+        heroStyle: {
+          backgroundImage: `${process.env.PUBLIC_URL}/images/no-image.png`
+        }
+      });
+    }
   }
 
   setIcon(flagType, siteId, userId) {
@@ -69,7 +67,9 @@ class Card extends Component {
   render() {
     return (
       <article className="site-card">
-        <div style={ this.state.heroStyle } className="hero"></div>
+        <div
+          style={ this.state.heroStyle }
+          className="hero"></div>
         <h3>{this.props.site.name.replace(/<[^>]+>/g, '')}</h3>
         <p>{this.props.site.description.replace(/<[^>]+>/g, '')}</p>
         <Link to="">...More</Link>
