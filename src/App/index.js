@@ -20,7 +20,7 @@ class App extends Component {
             key='Dashboard' />
           <Route
             exact path='/favorites'
-            render={() => <SiteList title='Favorites' section='favorties'/>}
+            render={() => <SiteList title='Favorites' section='favorites'/>}
             key='Favorites' />
           <Route
             exact path='/visited'

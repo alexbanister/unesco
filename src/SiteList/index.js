@@ -3,15 +3,29 @@ import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header/';
+import Card from '../Card/';
 
 class SiteList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      siteIds: []
+    };
+  }
+
+  displayCards(siteIds) {
+    return siteIds.map((id) => {
+      const siteObj = this.props.sites.find(site => site.id === id);
+      return <Card site={siteObj} key={siteObj.id}/>;
+    });
+  }
+
   render() {
     return (
       <div className='site-list'>
-        <section className='header__container'>
-          <Header title={this.props.title}/>
-        </section>
+        <Header title={this.props.title}/>
         <section className='site-list__content'>
+          {this.displayCards(this.props.user[this.props.section])}
         </section>
       </div>
     );
@@ -21,7 +35,8 @@ class SiteList extends Component {
 SiteList.propTypes = {};
 
 const mapStateToProps = store => ({
-  store
+  user: store.user,
+  sites: store.sites
 });
 
 const mapDispatchToProps = dispatch => ({
