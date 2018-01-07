@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { logoutAction, addSites } from '../Welcome/actions';
+import { setRegions, setCountries } from './actions';
 import Nav from '../Nav/';
+import Search from '../Search';
 import { getSites } from '../API/';
 
 class Header extends Component {
@@ -15,6 +17,9 @@ class Header extends Component {
       this.props.history.push('/');
     } else {
       this.getAllSites();
+      if (!this.props.regions) {
+        this.setCountryAndRegionLists();
+      }
     }
   }
 
@@ -40,6 +45,26 @@ class Header extends Component {
     return { backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)` };
   }
 
+  setCountryAndRegionLists = () => {
+    const { sites } = this.props;
+    const regionList = sites.reduce((acc, site) => {
+      if (!acc.includes(site.region)) {
+        acc.push(site.region);
+      }
+      return acc;
+    }, []);
+
+    const countryList = sites.reduce((acc, site) => {
+      if (!acc.includes(site.country_name)) {
+        acc.push(site.country_name);
+      }
+      return acc;
+    }, []);
+
+    this.props.setRegions(regionList);
+    this.props.setCountries(countryList);
+  }
+
   render() {
     return (
       <header className='header' style={this.getBackground()}>
@@ -58,12 +83,16 @@ Header.propTypes = {};
 
 const mapStateToProps = store => ({
   user: store.user,
-  sites: store.sites
+  sites: store.sites,
+  regions: store.regions,
+  countries: store.countries
 });
 
 const mapDispatchToProps = dispatch => ({
   logoutAction: user => (dispatch(logoutAction())),
-  addSites: sites => (dispatch(addSites(sites)))
+  addSites: sites => (dispatch(addSites(sites))),
+  setRegions: regions => dispatch(setRegions(regions)),
+  setCountries: countries => dispatch(setCountries(countries))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

@@ -11,7 +11,8 @@ class SiteList extends Component {
         <section className='header__container'>
           <Header title={this.props.title}/>
         </section>
-        <section className='site-list__content'></section>
+        <section className='site-list__content'>
+        </section>
       </div>
     );
   }
