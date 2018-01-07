@@ -31,7 +31,6 @@ class Search extends Component {
   }
 
   handleSearch = (type, searchTerm) => {
-    console.log('Search term: ', searchTerm);
     const { sites } = this.props;
     switch (type) {
     case 'country':
