@@ -12,6 +12,13 @@ import Search from '../Search';
 import { getSites } from '../API/';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      backgroundImage: {}
+    };
+  }
+
   componentWillMount() {
     if (!this.props.user.id) {
       this.props.history.push('/');
@@ -20,10 +27,17 @@ class Header extends Component {
       if (!this.props.regions) {
         this.setCountryAndRegionLists();
       }
+      const imgNum = Math.floor((Math.random() * 13) + 1);
+      this.setState({
+        backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)`
+      });
     }
   }
 
   loadSites = () => {
+    if (this.props.sites.length > 0) {
+      return true;
+    }
     const sites = localStorage.getItem('UNESCO_sites');
     if (sites) {
       this.props.addSites(JSON.parse(sites));
@@ -38,11 +52,6 @@ class Header extends Component {
       this.props.addSites(sites.sites);
       localStorage.setItem('UNESCO_sites', JSON.stringify(sites.sites));
     }
-  }
-
-  getBackground() {
-    const imgNum = Math.floor((Math.random() * 13) + 1);
-    return { backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)` };
   }
 
   setCountryAndRegionLists = () => {
@@ -67,7 +76,7 @@ class Header extends Component {
 
   render() {
     return (
-      <header className='header' style={this.getBackground()}>
+      <header className='header' style={this.state}>
         <div className="header__cover">
           <img className='header__logo' src={require('../assets/icons/traveler-logo.svg')} alt="traveler logo" />
           <section className='nav__container'>
