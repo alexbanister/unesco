@@ -71,8 +71,9 @@
 }
 
 .welcome__button__google,
-.welcome__button__twitter {
-  margin-bottom: 4%;
+.welcome__button__twitter,
+.welcome__button__facebook {
+  margin-bottom: 1%;
 }
 
 .welcome__button__google {
@@ -100,4 +101,13 @@
 
 .welcome__button__facebook:hover {
   @include button-style($facebook-dark, '../assets/icons/facebook-logo-white.svg', $facebook);
+}
+
+.welcome__button__github {
+  @extend %login-button;
+  @include button-style($github, '../assets/icons/github-logo-dark.svg', $github-dark);
+}
+
+.welcome__button__github:hover {
+  @include button-style($github-dark, '../assets/icons/github-logo-white.svg', $github);
 }
