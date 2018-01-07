@@ -78,6 +78,7 @@ class Card extends Component {
           {this.setIcon('visited', this.props.site.id, this.props.user.id)}
           {this.setIcon('wants', this.props.site.id, this.props.user.id)}
         </div>
+        <img src="https://drscdn.500px.org/photo/91538807/m%3D900_k%3D1_a%3D1/v2?client_application_id=11&webp=true&sig=10e43eae6a664c9694e76ec791f58813c06b3eb386976f09634e228296621a50" />
       </article>
     );
   }
