@@ -124,26 +124,15 @@ app.post('/api/v1/users', (request, response) => {
     })
     .catch(error => response.status(500).json({ error }));
 });
-// app.delete('/api/v1/users/:id', (request, response) => {});
 
-app.get('/api/v1/users/:id/favorites', (request, response) => {
+app.post('/api/v1/users/:id/flags', (request, response) => {
   const { id } = request.params;
-
-  database('sites')
-    .join('favorites', 'favorites.site_id', 'sites.id')
-    .where('favorites.user_id', id)
-    .select('*')
-    .then(favorites => response.status(200).json(favorites))
-    .catch(error => response.status(500).json({ error }));
-});
-app.post('/api/v1/users/:id/favorites', (request, response) => {
-  const { id } = request.params;
-  const { siteId } = request.body;
-  if (!siteId) {
+  const { siteId, flagType } = request.body;
+  if (!siteId || !flagType) {
     return response.status(422)
-      .json({ error: 'Expected format: { siteId: <Int> }.' });
+      .json({ error: 'Expected format: { siteId: <Int>, flagType: <String> }.' });
   }
-  return database('favorites').insert({
+  return database(flagType).insert({
     user_id: id,
     site_id: siteId
   })
@@ -154,10 +143,14 @@ app.post('/api/v1/users/:id/favorites', (request, response) => {
       response.status(500).json(error);
     });
 });
-app.delete('/api/v1/users/:id/favorites', (request, response) => {
+app.delete('/api/v1/users/:id/flags', (request, response) => {
   const { id } = request.params;
-  const { siteId } = request.body;
-  database('favorites')
+  const { siteId, flagType } = request.body;
+  if (!siteId || !flagType) {
+    return response.status(422)
+      .json({ error: 'Expected format: { siteId: <Int>, flagType: <String> }.' });
+  }
+  return database(flagType)
     .where({
       user_id: id,
       site_id: siteId
@@ -166,100 +159,6 @@ app.delete('/api/v1/users/:id/favorites', (request, response) => {
     .then((result) => {
       if (!result) {
         response.status(422).json({ error: 'No favorite site found' });
-      } else {
-        response.sendStatus(204);
-      }
-    })
-    .catch(error => response.status(422).json(error));
-});
-
-app.get('/api/v1/users/:id/visited', (request, response) => {
-  const { id } = request.params;
-
-  database('sites')
-    .join('visited', 'visited.site_id', 'sites.id')
-    .where('visited.user_id', id)
-    .select('*')
-    .then(visited => response.status(200).json(visited))
-    .catch(error => response.status(500).json({ error }));
-});
-app.post('/api/v1/users/:id/visited', (request, response) => {
-  const { id } = request.params;
-  const { siteId } = request.body;
-  if (!siteId) {
-    return response.status(422)
-      .json({ error: 'Expected format: { siteId: <Int> }.' });
-  }
-  return database('visited').insert({
-    user_id: id,
-    site_id: siteId
-  })
-    .then(() => {
-      response.status(204).send();
-    })
-    .catch((error) => {
-      response.status(500).json(error);
-    });
-});
-app.delete('/api/v1/users/:id/visited', (request, response) => {
-  const { id } = request.params;
-  const { siteId } = request.body;
-  database('visited')
-    .where({
-      user_id: id,
-      site_id: siteId
-    })
-    .del()
-    .then((result) => {
-      if (!result) {
-        response.status(422).json({ error: 'No visted site found' });
-      } else {
-        response.sendStatus(204);
-      }
-    })
-    .catch(error => response.status(422).json(error));
-});
-
-app.get('/api/v1/users/:id/wants', (request, response) => {
-  const { id } = request.params;
-
-  database('sites')
-    .join('wants', 'wants.site_id', 'sites.id')
-    .where('wants.user_id', id)
-    .select('*')
-    .then(wants => response.status(200).json(wants))
-    .catch(error => response.status(500).json({ error }));
-});
-app.post('/api/v1/users/:id/wants', (request, response) => {
-  const { id } = request.params;
-  const { siteId } = request.body;
-  if (!siteId) {
-    return response.status(422)
-      .json({ error: 'Expected format: { siteId: <Int> }.' });
-  }
-  return database('wants').insert({
-    user_id: id,
-    site_id: siteId
-  })
-    .then(() => {
-      response.status(204).send();
-    })
-    .catch((error) => {
-      response.status(500).json(error);
-    });
-});
-app.delete('/api/v1/users/:id/wants', (request, response) => {
-  const { id } = request.params;
-  const { siteId } = request.body;
-  database('wants')
-    .where({
-      user_id: id,
-      site_id: siteId
-    })
-    .del()
-    .then((result) => {
-      if (!result) {
-        response.status(422).json({ error: 'No wanted sites found' });
       } else {
         response.sendStatus(204);
       }
