@@ -5,11 +5,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-import firebase from 'firebase';
-import { log } from 'util';
->>>>>>> Add found search terms to the store
 import { logoutAction, addSites } from '../Welcome/actions';
 import { setRegions, setCountries } from './actions';
 import Nav from '../Nav/';
@@ -49,7 +44,7 @@ class Header extends Component {
     const imgNum = Math.floor((Math.random() * 13) + 1);
     return { backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)` };
   };
-  
+
   setCountryAndRegionLists = () => {
     const { sites } = this.props;
     const regionList = sites.reduce((acc, site) => {
