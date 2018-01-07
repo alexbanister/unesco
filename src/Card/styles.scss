@@ -1,0 +1,60 @@
+@import "../variables.scss";
+
+.site-card {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 15rem auto 8rem auto auto;
+  box-shadow: $shadow;
+  background: white;
+  padding-bottom: .5rem;
+  .hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  h3, p, a {
+    padding: .5rem;
+  }
+  p {
+    overflow: hidden;
+    line-height: 1.5rem;
+  }
+  a {
+    text-align: right;
+    font-weight: bold;
+  }
+  .icons {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .fav, .visited, .want {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: .5rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .fav {
+      background-image: url('../assets/icons/fav.svg');
+      &:hover {
+        background-image: url('../assets/icons/fav-on.svg');
+      }
+    }
+    .visited {
+      background-image: url('../assets/icons/visited.svg');
+      &:hover {
+        background-image: url('../assets/icons/visited-on.svg');
+      }
+    }
+    .want {
+      background-image: url('../assets/icons/want.svg');
+      &:hover {
+        background-image: url('../assets/icons/want-on.svg');
+      }
+    }
+  }
+}

@@ -4,19 +4,22 @@
   transition-duration: 0.3s;
 
   height: 5rem;
-  width: 50%;
-  margin-left: 25%;
+  width: 30rem;
+  margin: auto;
   font-size: 1.5em;
   color: whitesmoke;
   background-repeat: no-repeat;
-  background-position: -15% 50%;
+  background-position: -4rem;
   background-size: 45% 45%;
   border-radius: 12px;
   border: none;
 
   display: flex;
-  justify-content: flex-start;
-  padding-left: 12.5%;
+  justify-content: center;
+  padding-left: 4rem;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 @mixin button-style($bgColor, $path, $borderColor) {
@@ -25,14 +28,22 @@
   border-bottom: 3px solid $borderColor;
 }
 
+.welcome {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.welcome__cover {
+  background-color: $photo-overlay;
+}
 .welcome,
 .welcome__cover {
   height: 100vh;
-  width: 100%; 
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .welcome__content {
@@ -45,9 +56,13 @@
 }
 
 .welcome__text {
-  font-size: 1.2em;
+  font-size: 1.3em;
   line-height: 1.5;
-  color: $welcome-text;
+  font-weight: 400;
+  padding: 1rem;
+  margin-bottom: 2.5rem;
+  background-color: $photo-overlay;
+  color: $dark;
 }
 
 .welcome__button__container {

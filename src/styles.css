@@ -1,4 +1,5 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css";
+@import "https://fonts.googleapis.com/css?family=Raleway:300,400,800";
 @import url(./App/styles.css);
 @import url(./Welcome/styles.css);
 @import url(./Dashboard/styles.css);
@@ -7,11 +8,15 @@
 @import url(./Header/styles.css);
 @import url(./Nav/styles.css);
 @import url(./Search/styles.css);
+@import url(./Card/styles.css);
+
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; }
+  font-family: 'Raleway', sans-serif; }
 
 body {
   height: 100vh;
-  width: 100%; }
+  width: 100vw;
+  background: #dddfdf;
+  color: #202a25; }

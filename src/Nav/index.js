@@ -1,6 +1,7 @@
 /* eslint no-unused-vars: 0 */
 import React from 'react';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 // import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
 
@@ -46,6 +47,21 @@ const Header = () => {
             activeClassName='nav-link--selected'
             to='/profile'>
             profile
+          </NavLink>
+        </li>
+        <li className='nav__list__item'>
+          <NavLink
+            className='nav__link'
+            to='/'
+            onClick={() => {
+              firebase.auth().signOut()
+                .then(() => {
+                  this.props.logoutAction();
+                  this.props.history.push('/');
+                })
+                .catch(error => error);
+            }}>
+            log out
           </NavLink>
         </li>
       </ul>

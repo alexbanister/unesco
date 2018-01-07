@@ -1,0 +1,35 @@
+@import "../variables.scss";
+
+.highlights {
+  background: $highlight-third;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid $highlight-secondary;
+  border-top: 3px solid $highlight-secondary;
+}
+.callout {
+  margin: 0 1rem;
+  text-align: center;
+  h3 {
+    font-weight: 300;
+    font-size: 1.25rem;
+  }
+  h2 {
+    font-weight: 800;
+    font-size: 7rem;
+    line-height: 3rem;
+    margin: 1rem;
+    margin-bottom: 2rem;
+  }
+}
+.main-container {
+  width: 1024px;
+  margin: auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+}

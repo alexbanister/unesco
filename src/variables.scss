@@ -1,5 +1,4 @@
-$body-dark: #384E5E;
-$body-light: #405F73;
+$dark: #202a25;
 
 $google: #e8453c;
 $google-dark: #a72719;
@@ -8,21 +7,18 @@ $twitter-dark: #0f75b8;
 $facebook: #3b5998;
 $facebook-dark: #28417b;
 
-$highlight-dark: #AEE173;
-$background: #FFFFFF;
-$header-background: rgba(56,78,94,.9);
-$main-background: rgba(64,95,115,.6);
+$background: #dddfdf;
+$background-light: #ffffff;
 
-$welcome-text: #343434;
+$photo-overlay: rgba(255,255,255,.7);
+// $photo-overlay: rgba(0,0,0,.6);
 
-$highlight: #F6D22F;
+$highlight: #5b92e5;
+$highlight-secondary: #C08497;
+$highlight-third: #B0D0D3;
 
-$shadow: 5px 5px 25px $body-dark;
-$glow: 0 0 15px $highlight-dark;
-
-$nav-link: #343434;
-
-$nav-link-highlight: #5B92E5;
+$shadow: 5px 5px 25px $dark;
+$glow: 0 0 15px $highlight-third;
 
 @mixin radial-gradient($color2, $color1) {
   background: $color1;

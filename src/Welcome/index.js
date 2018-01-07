@@ -79,9 +79,14 @@ class Welcome extends Component {
       .catch(error => error);
   }
 
+  getBackground() {
+    const imgNum = Math.floor((Math.random() * 13) + 1);
+    return { backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)` };
+  }
+
   render() {
     return (
-      <main className='welcome'>
+      <main className='welcome' style={this.getBackground()}>
         <div className='welcome__cover'>
           <section className='welcome__content'>
             <article className='welcome__logo__container'>

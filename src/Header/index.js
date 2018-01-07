@@ -60,26 +60,21 @@ class Header extends Component {
 
     this.props.setRegions(regionList);
     this.props.setCountries(countryList);
+    
+  getBackground() {
+    const imgNum = Math.floor((Math.random() * 13) + 1);
+    return { backgroundImage: `url(${process.env.PUBLIC_URL}/images/backgrounds/${imgNum}.jpg)` };
   }
 
   render() {
     return (
-      <header className='header'>
-        <img className='header__logo'src={require('../assets/icons/traveler-logo.svg')} alt="traveler logo" />
-        <section className='nav__container'>
-          <Nav title={this.props.title}/>
-          <Search />
-        </section>
-        <button onClick={() => {
-          firebase.auth().signOut()
-            .then(() => {
-              this.props.logoutAction();
-              this.props.history.push('/');
-            })
-            .catch(error => error);
-        }}>
-          log out
-        </button>
+      <header className='header' style={this.getBackground()}>
+        <div className="header__cover">
+          <img className='header__logo' src={require('../assets/icons/traveler-logo.svg')} alt="traveler logo" />
+          <section className='nav__container'>
+            <Nav title={this.props.title}/>
+          </section>
+        </div>
       </header>
     );
   }

@@ -1,10 +1,15 @@
 .header {
-  height: 100%;
-  width: 100%; }
+  text-align: center;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.header__cover {
+  background-color: rgba(255, 255, 255, 0.7); }
 
 .header__logo {
-  height: 80%;
-  width: 100%; }
+  width: 25rem;
+  margin: 2rem; }
 
 .nav__container {
   height: 20%; }
