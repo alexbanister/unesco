@@ -42,7 +42,8 @@ class Welcome extends Component {
           email,
           name: displayName
         });
-        this.props.loginAction(login);
+        const userWithSearch = Object.assign({}, login, { search: [] });
+        this.props.loginAction(userWithSearch);
         this.props.history.push('/dashboard');
       }
     });
@@ -69,7 +70,8 @@ class Welcome extends Component {
           return user;
         })
         .then((res) => {
-          this.props.loginAction(res);
+          const user = Object.assign({}, res, { search: [] });
+          this.props.loginAction(user);
           this.props.history.push('/dashboard');
         })
         .catch(error => error);
