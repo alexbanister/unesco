@@ -1,15 +1,35 @@
-/* eslint no-unused-vars: 0 */
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter, match } from 'react-router-dom';
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import { removeFlag, addFlag } from '../Card/actions';
-import { addFlagFetch, removeFlagFetch } from '../API/';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Header from '../Header/';
+import FlagIcons from '../FlagIcons/';
 
-const SiteDetails = () => {
-  const setHeroImage = () => {
-    const img = this.props.site.image ?
-      `url(${this.props.site.image})` :
+class SiteDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      heroStyle: {},
+      site: {}
+    };
+  }
+
+  componentDidMount() {
+    const thisSite = this.props.sites.find((site) => {
+      return site.id === parseInt(this.props.match.params.id, 10);
+    });
+    this.setState({
+      site: thisSite
+    });
+  }
+
+  setHeroImage() {
+    if (this.state.heroStyle.backgroundImage) {
+      return;
+    }
+
+    const img = this.state.site.image ?
+      `url(${this.state.site.image})` :
       `url(${process.env.PUBLIC_URL}/images/no-image.png)`;
 
     this.setState({
@@ -17,54 +37,47 @@ const SiteDetails = () => {
         backgroundImage: img
       }
     });
-  };
+  }
 
-  const setIcon = (flagType, siteId, userId) => {
-    if (this.props.user[flagType].includes(siteId)) {
-      return (
-        <div
-          className={`${flagType}-on tooltip`}
-          onClick={() => this.flagOff(flagType, siteId, userId)}>
-          <span className="tooltiptext">{this.state[`${flagType}OnText`]}</span>
-        </div>
-      );
-    }
+  drawLoading() {
     return (
-      <div
-        className={`${flagType} tooltip`}
-        onClick={() => this.flagOn(flagType, siteId, userId)}>
-        <span className="tooltiptext">{this.state[`${flagType}Text`]}</span>
-      </div>
+      <article className="site-details">
+        <Header />
+        <div className="loading">
+          <img
+            src={`${process.env.PUBLIC_URL}/images/loading.gif`}
+            alt="Loading" />
+        </div>
+      </article>
     );
-  };
+  }
 
-  // flagOff(flagType, id, userId) {
-  //   removeFlagFetch(flagType, id, userId);
-  //   this.props.removeFlag({ flagType, id });
-  // }
-  //
-  // flagOn(flagType, id, userId) {
-  //   addFlagFetch(flagType, id, userId);
-  //   this.props.addFlag({ flagType, id });
-  // }
+  drawCard() {
+    this.setHeroImage();
+    return (
+      <article className="site-details">
+        <Header />
+        <section className='site-list__content'>
+          <div
+            style={ this.state.heroStyle }
+            className="hero"></div>
+          <h3>{this.state.site.name.replace(/<[^>]+>/g, '')}</h3>
+          <p>{this.state.site.description.replace(/<[^>]+>/g, '')}</p>
+          <FlagIcons siteId={this.state.site.id} />
+        </section>
+      </article>
+    );
+  }
 
-  return (
-    <section className='site-details'>
-
-    </section>
-  );
-};
+  render() {
+    return this.state.site.id ? this.drawCard() : this.drawLoading();
+  }
+}
 
 SiteDetails.propTypes = {};
 
 const mapStateToProps = store => ({
-  user: store.user,
-  site: store.sites.find(site => site.id === parseInt(match.params.id, 10))
+  sites: store.sites
 });
 
-const mapDispatchToProps = dispatch => ({
-  removeFlag: fav => (dispatch(removeFlag(fav))),
-  addFlag: fav => (dispatch(addFlag(fav)))
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SiteDetails));
+export default withRouter(connect(mapStateToProps, null)(SiteDetails));
