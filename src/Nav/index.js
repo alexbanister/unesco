@@ -21,6 +21,14 @@ const Header = () => {
           <NavLink
             className ='nav__link'
             activeClassName='nav-link--selected'
+            to='/explore'>
+            explore
+          </NavLink>
+        </li>
+        <li className='nav__list__item'>
+          <NavLink
+            className ='nav__link'
+            activeClassName='nav-link--selected'
             to='/favorites'>
             favorites
           </NavLink>

@@ -4,23 +4,37 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header/';
 import Card from '../Card/';
+import Search from '../Search';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      card1: {},
-      card2: {}
+      numOfCards: 5,
+      randomCards: []
     };
   }
 
   componentWillMount() {
-    const RandomNum1 = Math.floor((Math.random() * this.props.sites.length) - 1);
-    const RandomNum2 = Math.floor((Math.random() * this.props.sites.length) - 1);
     this.setState({
-      card1: this.props.sites[RandomNum1],
-      card2: this.props.sites[RandomNum2]
+      randomCards: this.setRandomIndex()
     });
+  }
+
+  setRandomIndex() {
+    let allCards = [];
+    for (let i = 0; i < this.state.numOfCards; i++) {
+      let index = this.getRandomIndex();
+      while (this.state.randomCards.includes(index)) {
+        index = this.getRandomIndex();
+      }
+      allCards = [...allCards, index];
+    }
+    return allCards;
+  }
+
+  getRandomIndex() {
+    return Math.floor((Math.random() * this.props.sites.length) - 1);
   }
 
   getCounts = (type) => {
@@ -30,10 +44,11 @@ class Dashboard extends Component {
     return 0;
   }
 
-  displayCard(id) {
+  displayCards(cards) {
     if (this.props.sites.length > 0) {
-      const cardSite = this.props.sites.find(site => site.id === parseInt(id));
-      return <Card site={cardSite} />;
+      return cards.map((card) => {
+        return <Card site={this.props.sites[card]} key={this.props.sites[card].id} />;
+      });
     }
     return false;
   }
@@ -57,11 +72,8 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="main-container">
-          <Card site={this.state.card1} />
-          <Card site={this.state.card2} />
-          <div className="dashboard-search">
-            search
-          </div>
+          <Search />
+          {this.displayCards(this.state.randomCards)}
         </div>
       </div>
     );
