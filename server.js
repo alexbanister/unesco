@@ -164,6 +164,10 @@ app.delete('/api/v1/users/:id/flags', (request, response) => {
     .catch(error => response.status(422).json(error));
 });
 
+app.get('/*', (request, response) => {
+  response.sendFile('./build/index.html');
+});
+
 app.use((request, response) => {
   response.status(404).send('Sorry can\'t find that!');
   response.end();

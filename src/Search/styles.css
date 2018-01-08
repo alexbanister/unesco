@@ -1,0 +1,8 @@
+.search {
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 5px 5px 25px #202a25; }
+  .search input, .search select {
+    width: 100%;
+    height: 2rem;
+    margin: .5rem 0 1rem 0; }
