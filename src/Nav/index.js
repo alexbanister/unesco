@@ -5,7 +5,7 @@ import firebase from 'firebase';
 // import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
 
-const Header = () => {
+const Nav = () => {
   return (
     <nav className='nav'>
       <ul className='nav__list'>
@@ -77,6 +77,6 @@ const Header = () => {
   );
 };
 
-Header.propTypes = {};
+Nav.propTypes = {};
 
-export default Header;
+export default Nav;

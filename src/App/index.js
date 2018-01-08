@@ -4,6 +4,7 @@ import Welcome from '../Welcome/';
 import Dashboard from '../Dashboard/';
 import SiteList from '../SiteList/';
 import Profile from '../Profile/';
+import SiteDetails from '../SiteDetails/';
 
 class App extends Component {
   render() {
@@ -39,6 +40,10 @@ class App extends Component {
               exact path='/profile'
               component={Profile}
               key='Profile' />
+            <Route
+              exact path='/site/:id'
+              component={SiteDetails}
+              key='SiteDetails' />
             <Route component={ Welcome } />
           </Switch>
         </main>
