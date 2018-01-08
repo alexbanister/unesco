@@ -23,7 +23,7 @@ describe('Welcome Reducer', () => {
 
     expect(expectation).toEqual(expected);
   });
-  it.skip('should pass an add flag data object action', () => {
+  it('should pass an add flag data object action', () => {
     const flagType = 'visited';
     const id = 1873;
     const flag = { flagType, id };
@@ -34,7 +34,7 @@ describe('Welcome Reducer', () => {
 
     expect(expectation).toEqual(expected);
   });
-  it.skip('should pass a remove flag data object action', () => {
+  it('should pass a remove flag data object action', () => {
     const flagType = 'visited';
     const id = 1873;
     const flag = { flagType, id };
