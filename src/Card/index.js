@@ -85,7 +85,7 @@ class Card extends Component {
           className="hero"></div>
         <h3>{this.props.site.name.replace(/<[^>]+>/g, '')}</h3>
         <p>{this.props.site.description.replace(/<[^>]+>/g, '')}</p>
-        <Link to="">...More</Link>
+        <Link to={`/site/${this.props.site.id}`}>...More</Link>
         <div className="icons">
           {this.setIcon('favorites', this.props.site.id, this.props.user.id)}
           {this.setIcon('visited', this.props.site.id, this.props.user.id)}
