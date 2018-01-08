@@ -32,6 +32,10 @@ class App extends Component {
               render={() => <SiteList title='Want To Go' section='wants' />}
               key='Wants' />
             <Route
+              exact path='/explore'
+              render={() => <SiteList title='Explore' section='search' />}
+              key='Search' />
+            <Route
               exact path='/profile'
               component={Profile}
               key='Profile' />

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header/';
 import Card from '../Card/';
+import Search from '../Search/';
 
 class SiteList extends Component {
   constructor(props) {
@@ -28,6 +29,10 @@ class SiteList extends Component {
       <div className='site-list'>
         <Header title={this.props.title}/>
         <section className='site-list__content'>
+          {
+            this.props.section === 'search' &&
+            <Search />
+          }
           {sites}
         </section>
       </div>
