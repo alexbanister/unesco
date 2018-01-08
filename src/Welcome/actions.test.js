@@ -1,13 +1,13 @@
 import { loginAction, logoutAction, addSites } from './actions';
 
-describe('Welcome actions', () => {
+describe('Welcome Actions', () => {
   it('should have an action to set a user', () => {
     const id = '7pNACovMQMp8IdDokuWo';
     const email = 'awesomeuser@gmail.com';
     const name = 'Awesome User';
-    const mockUser = { id, email, name };
-    const expected = { type: 'SET_USER', user: mockUser };
-    const expectation = loginAction(mockUser);
+    const user = { id, email, name };
+    const expected = { type: 'SET_USER', user };
+    const expectation = loginAction(user);
 
     expect(expectation).toEqual(expected);
   });
