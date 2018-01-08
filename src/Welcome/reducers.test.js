@@ -1,4 +1,4 @@
-import { user, sites } from './reducers';
+import * as reducers from './reducers';
 
 describe('Welcome Reducer', () => {
   it('should pass a user data object action', () => {
@@ -8,7 +8,7 @@ describe('Welcome Reducer', () => {
     const mockUser = { id, email, name };
     const action = { type: 'SET_USER', user: mockUser };
     const expectation = action.user;
-    const expected = user(mockUser, action);
+    const expected = reducers.user(mockUser, action);
 
     expect(expectation).toEqual(expected);
   });
@@ -19,7 +19,7 @@ describe('Welcome Reducer', () => {
     const mockUser = { id, email, name };
     const action = { type: 'CLEAR_USER', user: mockUser };
     const expectation = {};
-    const expected = user(mockUser, action);
+    const expected = reducers.user(mockUser, action);
 
     expect(expectation).toEqual(expected);
   });
@@ -30,7 +30,7 @@ describe('Welcome Reducer', () => {
     const action = { type: 'ADD_FLAG', flag };
 
     const expectation = action.flag;
-    const expected = user(flag, action.flag);
+    const expected = reducers.user(flag, action.flag);
 
     expect(expectation).toEqual(expected);
   });
@@ -41,7 +41,7 @@ describe('Welcome Reducer', () => {
     const action = { type: 'REMOVE_FLAG', flag };
 
     const expectation = action.flag;
-    const expected = user(flag, action.flag);
+    const expected = reducers.user(flag, action.flag);
 
     expect(expectation).toEqual(expected);
   });
@@ -49,7 +49,7 @@ describe('Welcome Reducer', () => {
     const search = 'grand';
     const action = { type: 'SET_SEARCH', search };
     const expectation = action.search;
-    const expected = user(search, action.search);
+    const expected = reducers.user(search, action.search);
 
     expect(expectation).toEqual(expected);
   });
@@ -62,7 +62,7 @@ describe('Welcome Reducer', () => {
     ];
     const action = { type: 'ADD_SITES', sites };
     const expectation = action.sites;
-    const expected = user(sites, action);
+    const expected = reducers.user(sites, action);
 
     expect(expectation).toEqual(expected);
   });

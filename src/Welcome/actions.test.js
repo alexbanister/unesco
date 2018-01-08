@@ -1,4 +1,4 @@
-import { loginAction, logoutAction, addSites } from './actions';
+import * as actions from './actions';
 
 describe('Welcome Actions', () => {
   it('should have an action to set a user', () => {
@@ -7,7 +7,7 @@ describe('Welcome Actions', () => {
     const name = 'Awesome User';
     const user = { id, email, name };
     const expected = { type: 'SET_USER', user };
-    const expectation = loginAction(user);
+    const expectation = actions.loginAction(user);
 
     expect(expectation).toEqual(expected);
   });
@@ -18,7 +18,7 @@ describe('Welcome Actions', () => {
     const name = 'Awesome User';
     const mockUser = { id, email, name };
     const expected = { type: 'CLEAR_USER', user: mockUser };
-    const expectation = logoutAction(mockUser);
+    const expectation = actions.logoutAction(mockUser);
 
     expect(expectation).toEqual(expected);
   });
@@ -31,7 +31,7 @@ describe('Welcome Actions', () => {
       { id: 4, name: 'My Apartment' }
     ];
     const expected = { type: 'ADD_SITES', sites: mockSites };
-    const expectation = addSites(mockSites);
+    const expectation = actions.addSites(mockSites);
 
     expect(expectation).toEqual(expected);
   });
