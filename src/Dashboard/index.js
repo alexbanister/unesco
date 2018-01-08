@@ -87,8 +87,4 @@ const mapStateToProps = store => ({
   user: store.user
 });
 
-const mapDispatchToProps = dispatch => ({
-  dispatch
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
+export default withRouter(connect(mapStateToProps, null)(Dashboard));

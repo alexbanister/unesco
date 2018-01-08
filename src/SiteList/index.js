@@ -47,8 +47,4 @@ const mapStateToProps = store => ({
   sites: store.sites
 });
 
-const mapDispatchToProps = dispatch => ({
-  dispatch
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SiteList));
+export default withRouter(connect(mapStateToProps, null)(SiteList));
