@@ -51,14 +51,6 @@ const Nav = () => {
         </li>
         <li className='nav__list__item'>
           <NavLink
-            className='nav__link profile'
-            activeClassName='nav-link--selected'
-            to='/profile'>
-            profile
-          </NavLink>
-        </li>
-        <li className='nav__list__item'>
-          <NavLink
             className='nav__link'
             to='/'
             onClick={() => {

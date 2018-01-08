@@ -57,13 +57,49 @@ class SiteDetails extends Component {
     return (
       <article className="site-details">
         <Header />
-        <section className='site-list__content'>
+        <section className='site-details__content'>
           <div
             style={ this.state.heroStyle }
             className="hero"></div>
-          <h3>{this.state.site.name.replace(/<[^>]+>/g, '')}</h3>
-          <p>{this.state.site.description.replace(/<[^>]+>/g, '')}</p>
+          <div className="site-name">
+            <h2>{this.state.site.name.replace(/<[^>]+>/g, '')}</h2>
+            {this.state.site.country_name}, {this.state.site.region}
+          </div>
           <FlagIcons siteId={this.state.site.id} />
+          <div className="specs">
+            <div>
+              <h4>Inscribed</h4>
+            </div>
+            <div>
+              {this.state.site.inscribed}
+            </div>
+            <div>
+              <h4>Category</h4>
+            </div>
+            <div>
+              {this.state.site.category}
+            </div>
+            <div>
+              <h4>Size</h4>
+            </div>
+            <div>
+              {this.state.site.size}
+            </div>
+            <div>
+              <h4>Latitude & Longitude</h4>
+            </div>
+            <div>
+              {this.state.site.latitude}, {this.state.site.longitude}
+            </div>
+          </div>
+          <div className="desc">
+            <h3>Description</h3>
+            <p dangerouslySetInnerHTML={{ __html: this.state.site.description }}></p>
+          </div>
+          <div className="justification">
+            <h3>Justifaction</h3>
+            <p dangerouslySetInnerHTML={{ __html: this.state.site.justification }}></p>
+          </div>
         </section>
       </article>
     );

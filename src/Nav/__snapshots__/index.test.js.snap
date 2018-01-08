@@ -84,18 +84,6 @@ ShallowWrapper {
                 className="nav__list__item"
         >
                 <NavLink
-                        activeClassName="nav-link--selected"
-                        ariaCurrent="true"
-                        className="nav__link profile"
-                        to="/profile"
-                >
-                        profile
-                </NavLink>
-        </li>
-        <li
-                className="nav__list__item"
-        >
-                <NavLink
                         activeClassName="active"
                         ariaCurrent="true"
                         className="nav__link"
@@ -173,18 +161,6 @@ ShallowWrapper {
                         to="/wants"
             >
                         want to go
-            </NavLink>
-</li>,
-          <li
-            className="nav__list__item"
->
-            <NavLink
-                        activeClassName="nav-link--selected"
-                        ariaCurrent="true"
-                        className="nav__link profile"
-                        to="/profile"
-            >
-                        profile
             </NavLink>
 </li>,
           <li
@@ -376,39 +352,6 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <NavLink
-              activeClassName="nav-link--selected"
-              ariaCurrent="true"
-              className="nav__link profile"
-              to="/profile"
->
-              profile
-</NavLink>,
-            "className": "nav__list__item",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "activeClassName": "nav-link--selected",
-              "ariaCurrent": "true",
-              "children": "profile",
-              "className": "nav__link profile",
-              "to": "/profile",
-            },
-            "ref": null,
-            "rendered": "profile",
-            "type": [Function],
-          },
-          "type": "li",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <NavLink
               activeClassName="active"
               ariaCurrent="true"
               className="nav__link"
@@ -516,18 +459,6 @@ ShallowWrapper {
                     className="nav__list__item"
           >
                     <NavLink
-                              activeClassName="nav-link--selected"
-                              ariaCurrent="true"
-                              className="nav__link profile"
-                              to="/profile"
-                    >
-                              profile
-                    </NavLink>
-          </li>
-          <li
-                    className="nav__list__item"
-          >
-                    <NavLink
                               activeClassName="active"
                               ariaCurrent="true"
                               className="nav__link"
@@ -605,18 +536,6 @@ ShallowWrapper {
                             to="/wants"
               >
                             want to go
-              </NavLink>
-</li>,
-            <li
-              className="nav__list__item"
->
-              <NavLink
-                            activeClassName="nav-link--selected"
-                            ariaCurrent="true"
-                            className="nav__link profile"
-                            to="/profile"
-              >
-                            profile
               </NavLink>
 </li>,
             <li
@@ -798,39 +717,6 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": "want to go",
-              "type": [Function],
-            },
-            "type": "li",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": <NavLink
-                activeClassName="nav-link--selected"
-                ariaCurrent="true"
-                className="nav__link profile"
-                to="/profile"
->
-                profile
-</NavLink>,
-              "className": "nav__list__item",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "activeClassName": "nav-link--selected",
-                "ariaCurrent": "true",
-                "children": "profile",
-                "className": "nav__link profile",
-                "to": "/profile",
-              },
-              "ref": null,
-              "rendered": "profile",
               "type": [Function],
             },
             "type": "li",

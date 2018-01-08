@@ -1,61 +1,37 @@
-.site-card {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 15rem auto 8rem auto auto;
-  box-shadow: 5px 5px 25px #202a25;
-  background: white;
-  padding-bottom: .5rem; }
-  .site-card .loading {
-    grid-row: span 5;
-    display: flex;
-    align-items: center;
-    justify-content: center; }
-  .site-card .hero {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; }
-  .site-card h3, .site-card p, .site-card a {
-    padding: .5rem; }
-  .site-card p {
-    overflow: hidden;
-    line-height: 1.5rem; }
-  .site-card a {
-    text-align: right;
-    font-weight: bold; }
-  .site-card .icons {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center; }
-    .site-card .icons .favorites, .site-card .icons .visited, .site-card .icons .wants, .site-card .icons .favorites-on, .site-card .icons .visited-on, .site-card .icons .wants-on {
-      width: 2.5rem;
-      height: 2.5rem;
-      margin: .5rem; }
-      .site-card .icons .favorites:hover, .site-card .icons .visited:hover, .site-card .icons .wants:hover, .site-card .icons .favorites-on:hover, .site-card .icons .visited-on:hover, .site-card .icons .wants-on:hover {
-        cursor: pointer; }
-    .site-card .icons .favorites {
-      background-image: url("../assets/icons/fav.svg"); }
-      .site-card .icons .favorites:hover {
-        background-image: url("../assets/icons/fav-on.svg"); }
-    .site-card .icons .favorites-on {
+.icons {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .icons .favorites, .icons .visited, .icons .wants, .icons .favorites-on, .icons .visited-on, .icons .wants-on {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: .5rem; }
+    .icons .favorites:hover, .icons .visited:hover, .icons .wants:hover, .icons .favorites-on:hover, .icons .visited-on:hover, .icons .wants-on:hover {
+      cursor: pointer; }
+  .icons .favorites {
+    background-image: url("../assets/icons/fav.svg"); }
+    .icons .favorites:hover {
       background-image: url("../assets/icons/fav-on.svg"); }
-      .site-card .icons .favorites-on:hover {
-        background-image: url("../assets/icons/fav.svg"); }
-    .site-card .icons .visited {
-      background-image: url("../assets/icons/visited.svg"); }
-      .site-card .icons .visited:hover {
-        background-image: url("../assets/icons/visited-on.svg"); }
-    .site-card .icons .visited-on {
+  .icons .favorites-on {
+    background-image: url("../assets/icons/fav-on.svg"); }
+    .icons .favorites-on:hover {
+      background-image: url("../assets/icons/fav.svg"); }
+  .icons .visited {
+    background-image: url("../assets/icons/visited.svg"); }
+    .icons .visited:hover {
       background-image: url("../assets/icons/visited-on.svg"); }
-      .site-card .icons .visited-on:hover {
-        background-image: url("../assets/icons/visited.svg"); }
-    .site-card .icons .wants {
-      background-image: url("../assets/icons/want.svg"); }
-      .site-card .icons .wants:hover {
-        background-image: url("../assets/icons/want-on.svg"); }
-    .site-card .icons .wants-on {
+  .icons .visited-on {
+    background-image: url("../assets/icons/visited-on.svg"); }
+    .icons .visited-on:hover {
+      background-image: url("../assets/icons/visited.svg"); }
+  .icons .wants {
+    background-image: url("../assets/icons/want.svg"); }
+    .icons .wants:hover {
       background-image: url("../assets/icons/want-on.svg"); }
-      .site-card .icons .wants-on:hover {
-        background-image: url("../assets/icons/want.svg"); }
+  .icons .wants-on {
+    background-image: url("../assets/icons/want-on.svg"); }
+    .icons .wants-on:hover {
+      background-image: url("../assets/icons/want.svg"); }
