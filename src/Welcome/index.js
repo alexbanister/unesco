@@ -117,11 +117,6 @@ class Welcome extends Component {
                 onClick={() => this.continueLogin('facebook')}>
                 Continue With Facebook
               </button>
-              <button
-                className='welcome__button__github'
-                onClick={() => this.continueLogin('github')}>
-                Continue With GitHub
-              </button>
             </article>
           </section>
         </div>
