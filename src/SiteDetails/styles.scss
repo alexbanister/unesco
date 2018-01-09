@@ -1,0 +1,52 @@
+@import "../variables.scss";
+
+.site-details {
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .site-details__content {
+    width: 1024px;
+    margin: auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-areas: "hero name" "hero flags" "hero specs" "desc desc" "justification justification";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 2.5rem auto auto;
+    grid-column-gap: 2rem;
+    grid-row-gap: 1rem;
+  }
+  .hero {
+    grid-area: hero;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .site-name {
+    grid-area: name;
+    font-size: 1.25rem;
+    h2 {
+      font-size: 2rem;
+      padding: .5rem 0;
+    }
+  }
+  .icons {
+    grid-area: flags;
+    justify-content: flex-start;
+  }
+  .specs {
+    grid-area: specs;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    margin: 1rem 0;
+  }
+  .desc {
+    grid-area: desc;
+  }
+  .justification {
+    grid-area: justification;
+  }
+}

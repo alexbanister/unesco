@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Welcome from '../Welcome/';
 import Dashboard from '../Dashboard/';
 import SiteList from '../SiteList/';
+import SiteDetails from '../SiteDetails/';
 
 class App extends Component {
   render() {
@@ -34,6 +35,10 @@ class App extends Component {
               exact path='/explore'
               render={() => <SiteList title='Explore' section='search' />}
               key='Search' />
+            <Route
+              exact path='/site/:id'
+              component={SiteDetails}
+              key='SiteDetails' />
             <Route component={ Welcome } />
           </Switch>
         </main>

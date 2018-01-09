@@ -1,0 +1,37 @@
+.icons {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .icons .favorites, .icons .visited, .icons .wants, .icons .favorites-on, .icons .visited-on, .icons .wants-on {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: .5rem; }
+    .icons .favorites:hover, .icons .visited:hover, .icons .wants:hover, .icons .favorites-on:hover, .icons .visited-on:hover, .icons .wants-on:hover {
+      cursor: pointer; }
+  .icons .favorites {
+    background-image: url("../assets/icons/fav.svg"); }
+    .icons .favorites:hover {
+      background-image: url("../assets/icons/fav-on.svg"); }
+  .icons .favorites-on {
+    background-image: url("../assets/icons/fav-on.svg"); }
+    .icons .favorites-on:hover {
+      background-image: url("../assets/icons/fav.svg"); }
+  .icons .visited {
+    background-image: url("../assets/icons/visited.svg"); }
+    .icons .visited:hover {
+      background-image: url("../assets/icons/visited-on.svg"); }
+  .icons .visited-on {
+    background-image: url("../assets/icons/visited-on.svg"); }
+    .icons .visited-on:hover {
+      background-image: url("../assets/icons/visited.svg"); }
+  .icons .wants {
+    background-image: url("../assets/icons/want.svg"); }
+    .icons .wants:hover {
+      background-image: url("../assets/icons/want-on.svg"); }
+  .icons .wants-on {
+    background-image: url("../assets/icons/want-on.svg"); }
+    .icons .wants-on:hover {
+      background-image: url("../assets/icons/want.svg"); }

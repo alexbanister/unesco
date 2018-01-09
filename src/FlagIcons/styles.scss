@@ -1,0 +1,54 @@
+@import "../variables.scss";
+
+.icons {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .favorites, .visited, .wants, .favorites-on, .visited-on, .wants-on {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: .5rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .favorites {
+    background-image: url('../assets/icons/fav.svg');
+    &:hover {
+      background-image: url('../assets/icons/fav-on.svg');
+    }
+  }
+  .favorites-on {
+    background-image: url('../assets/icons/fav-on.svg');
+    &:hover {
+      background-image: url('../assets/icons/fav.svg');
+    }
+  }
+  .visited {
+    background-image: url('../assets/icons/visited.svg');
+    &:hover {
+      background-image: url('../assets/icons/visited-on.svg');
+    }
+  }
+  .visited-on {
+    background-image: url('../assets/icons/visited-on.svg');
+    &:hover {
+      background-image: url('../assets/icons/visited.svg');
+    }
+  }
+  .wants {
+    background-image: url('../assets/icons/want.svg');
+    &:hover {
+      background-image: url('../assets/icons/want-on.svg');
+    }
+  }
+  .wants-on {
+    background-image: url('../assets/icons/want-on.svg');
+    &:hover {
+      background-image: url('../assets/icons/want.svg');
+    }
+  }
+}
