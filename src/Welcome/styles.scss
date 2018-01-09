@@ -3,7 +3,7 @@
 %login-button {
   transition-duration: 0.3s;
 
-  height: 5rem;
+  height: 4rem;
   width: 30rem;
   margin: auto;
   font-size: 1.5em;
@@ -55,14 +55,29 @@
   margin-bottom:2%;
 }
 
+.welcome__logo__container {
+  height: 5%;
+}
+
+.welcome__text__container {
+  padding: 1rem;
+  background-color: $photo-overlay;
+  color: $dark;
+  margin-bottom: 2.5rem;
+}
+
+.welcome__title {
+  text-align: center;
+}
+
 .welcome__text {
   font-size: 1.3em;
   line-height: 1.5;
   font-weight: 400;
   padding: 1rem;
-  margin-bottom: 2.5rem;
-  background-color: $photo-overlay;
-  color: $dark;
+  // margin-bottom: 2.5rem;
+  // background-color: $photo-overlay;
+  // color: $dark;
 }
 
 .welcome__button__container {
@@ -73,7 +88,7 @@
 .welcome__button__google,
 .welcome__button__twitter,
 .welcome__button__facebook {
-  margin-bottom: 1%;
+  margin-bottom: 0.5%;
 }
 
 .welcome__button__google {
