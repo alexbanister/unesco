@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import Welcome from '../Welcome/';
 import Dashboard from '../Dashboard/';
 import SiteList from '../SiteList/';
-import Profile from '../Profile/';
 
 class App extends Component {
   render() {
@@ -35,10 +34,6 @@ class App extends Component {
               exact path='/explore'
               render={() => <SiteList title='Explore' section='search' />}
               key='Search' />
-            <Route
-              exact path='/profile'
-              component={Profile}
-              key='Profile' />
             <Route component={ Welcome } />
           </Switch>
         </main>
