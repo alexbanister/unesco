@@ -165,7 +165,8 @@ app.delete('/api/v1/users/:id/flags', (request, response) => {
 });
 
 app.get('/*', (request, response) => {
-  response.sendFile('./build/index.html');
+  // eslint-disable-next-line
+  response.sendFile('./build/index.html', { 'root': __dirname });
 });
 
 app.use((request, response) => {
