@@ -6,7 +6,6 @@ import Card from './index';
 describe('Card', () => {
   it('should always match the snapshot', () => {
     const wrapper = shallow(<Card />);
-
     expect(wrapper).toMatchSnapshot();
   });
 });

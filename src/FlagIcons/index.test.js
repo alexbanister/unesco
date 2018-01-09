@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Welcome from './index';
+import FlagIcons from './index';
 
 
 describe('Card', () => {
-  it.skip('should always match the snapshot', () => {
-    const wrapper = shallow(<Welcome />);
+  it('should always match the snapshot', () => {
+    const wrapper = shallow(<FlagIcons />);
 
     expect(wrapper).toMatchSnapshot();
   });

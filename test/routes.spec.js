@@ -318,10 +318,55 @@ describe('API Routes', () => {
         })
         .catch((error) => { throw error; });
     });
-    it.skip('should remove site_id and user_id object from favorites', () => {});
-    it.skip('should remove site_id and user_id object from visited', () => {});
-    it.skip('should return 422 if POST body is incorrectly formatted', () => {});
-    it.skip('should return 500 if user does not exist', () => {});
-    it.skip('should return 500 if site does not exist', () => {});
+    it.skip('should remove site_id and user_id object from favorites', () => {
+      const user = { id: 5 };
+      const flag = { siteId: 3, flagType: 'wants' };
+      return chai.request(server)
+        .delete(`/api/v1/users/${user.id}/flags`).send(flag)
+        .then((res) => {
+          res.should.have.status(204);
+        })
+        .catch((error) => { throw error; });
+    });
+    it.skip('should remove site_id and user_id object from visited', () => {
+      const user = { id: 5 };
+      const flag = { siteId: 3, flagType: 'wants' };
+      return chai.request(server)
+        .delete(`/api/v1/users/${user.id}/flags`).send(flag)
+        .then((res) => {
+          res.should.have.status(204);
+        })
+        .catch((error) => { throw error; });
+    });
+    it('should return 422 if DELETE body is incorrectly formatted', () => {
+      const user = { id: 5 };
+      const flag = { site_id: 3, flagType: 'wants' };
+      return chai.request(server)
+        .delete(`/api/v1/users/${user.id}/flags`).send(flag)
+        .then((res) => {
+          res.should.have.status(422);
+        })
+        .catch((error) => { throw error; });
+    });
+    it('should return 422 if user does not exist', () => {
+      const user = { id: 6 };
+      const flag = { site_id: 3, flagType: 'wants' };
+      return chai.request(server)
+        .delete(`/api/v1/users/${user.id}/flags`).send(flag)
+        .then((res) => {
+          res.should.have.status(422);
+        })
+        .catch((error) => { throw error; });
+    });
+    it('should return 422 if site does not exist', () => {
+      const user = { id: 5 };
+      const flag = { site_id: 0, flagType: 'wants' };
+      return chai.request(server)
+        .delete(`/api/v1/users/${user.id}/flags`).send(flag)
+        .then((res) => {
+          res.should.have.status(422);
+        })
+        .catch((error) => { throw error; });
+    });
   });
 });
