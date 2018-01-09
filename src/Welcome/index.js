@@ -99,7 +99,8 @@ class Welcome extends Component {
                 alt='unesco traveler logo' />
             </article>
             <article className='welcome__text__container'>
-              <p className='welcome__text'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo conse</p>
+              <h2 className='welcome__title'>Track Your Visits to UNESCO World Heritage Sites!</h2>
+              <p className='welcome__text'>What is a World Heritage Site? A World Heritage Site is a landmark or area which is selected by the United Nations Educational, Scientific and Cultural Organization (UNESCO) as having cultural, historical, scientific or other form of significance, and is legally protected by international treaties. The sites are judged important to the collective interests of humanity. As of January 2018, there are 1,073 designated sites.</p>
             </article>
             <article className='welcome__button__container'>
               <button
