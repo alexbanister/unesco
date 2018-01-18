@@ -47,21 +47,12 @@ class FlagIcons extends Component {
     this.props.addFlag({ flagType, id });
   }
 
-  displayIcons() {
-    if (this.props.user.favorites &&
-      this.props.user.visited &&
-      this.props.user.wants
-    ) {
-      this.setIcon('favorites', this.props.siteId, this.props.user.id);
-      this.setIcon('visited', this.props.siteId, this.props.user.id);
-      this.setIcon('wants', this.props.siteId, this.props.user.id);
-    }
-  }
-
   render() {
     return (
       <div className="icons">
-        {this.displayIcons()}
+        {this.setIcon('favorites', this.props.siteId, this.props.user.id)}
+        {this.setIcon('visited', this.props.siteId, this.props.user.id)}
+        {this.setIcon('wants', this.props.siteId, this.props.user.id)}
       </div>
     );
   }
